@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.7.1",
     "@react-native-community/checkbox": "^0.2.2",
     "expo": "^34.0.1",
     "native-base": "^2.13.8",

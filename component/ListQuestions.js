@@ -26,11 +26,10 @@ export default class ListQuestions extends Component {
         return (
             this.state.questions.map((cb) => {
                 return (
-                   <View key={cb.id}>
+                   <View key={cb.id} style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
                         <CheckBox isChecked={cb.checked} onClick={()=>this.handleCheckBox(cb.id)}/>
                         <Text>{cb.question}</Text>
-                    </View>
-                    
+                    </View>                   
                 )
             })
         )
