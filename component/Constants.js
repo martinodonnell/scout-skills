@@ -1,0 +1,9 @@
+export const BACKWOODS = "Backwoods";
+export const CAMPING= "Camping";
+export const EMERGENCIES= "Emergencies";
+export const HIKING= "Hiking";
+export const PIONEERING= "Pioneering";
+export const PADDLING= "Paddling";
+export const ROWING= "Rowing";
+export const AIR= "Air";
+export const SAILING= "Sailing";
