@@ -52,7 +52,7 @@ export default class SkillScreen extends Component {
 
     
     if(questions.length==0){
-        return <Text>Loading {level}</Text>
+        return <Text>Loading</Text>
     }else{
       return (  
           <View>          

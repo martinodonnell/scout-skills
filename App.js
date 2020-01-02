@@ -1,34 +1,19 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View,AsyncStorage,Button} from 'react-native';
-import { NativeRouter, Route, Link } from "react-router-native";
+import { NativeRouter, Route, Link,Redirect } from "react-router-native";
+import * as Constants from './component/Constants'
+import { withRouter } from "react-router-dom";
 
 /* IMporting nav components */
 import SkillSelect from './component/SkillSelect';
-import SkillScreen from './component/SkillScreen';
-import * as Constants from './component/Constants'
 
-
-
-const Home = () => <Text>Home</Text>;
-const Stage1 = () => <SkillScreen level={1}/>;
-const Stage2 = () => <SkillScreen level={2}/>;
-const Stage3 = () => <SkillScreen level={3}/>;
-const Stage4 = () => <SkillScreen level={4}/>;
-const Stage5 = () => <SkillScreen level={5}/>;
-const Stage6 = () => <SkillScreen level={6}/>;
-const Stage7 = () => <SkillScreen level={7}/>;
-const Stage8 = () => <SkillScreen level={8}/>;
-const Stage9 = () => <SkillScreen level={9}/>;
-
-
-export default class App extends Component { 
+class App extends Component { 
 
   constructor(){
     super();
     this.state = {
       questions:[],
-      skill:"Camping",
-      currentLevel:1
+      skill:"Camping"
     }
   }
 
@@ -164,45 +149,13 @@ export default class App extends Component {
     }
   }
 
-  moveForward(){
-    console.log(this.state.currentLevel);
-    const {currentLevel} = this.state;
-    if(currentLevel<9){
-      this.setState({currentLevel:currentLevel+1});
-    }
-  }
-
   render(){
-    return (  
-      <View>
-        <Text>Current Level: {this.state.currentLevel}</Text>
-        <Text>Current Level: {this.state.currentLevel}</Text>
-        <NativeRouter>
-          <View style={styles.container}>
-            <View style={styles.nav}>
-              <Link to="/" underlayColor="#f0f4f7" style={styles.navItem}>
-                <Text>Home</Text>
-              </Link>
-              <Link to={"/stage"+this.state.currentLevel}  underlayColor="#f0f4f7" style={styles.navItem}>
-                <Text>Left</Text>
-              </Link>
-              <Link to={"/stage"+(this.state.currentLevel)} underlayColor="#f0f4f7" onPress={()=>this.moveForward()}style={styles.navItem}>
-                <Text>Right</Text>
-              </Link>
-              <Button title="Complete" onPress={()=>this.moveForward()}/>
-            </View>
 
-            <Route exact path="/" component={Home} />
-            <Route path="/stage1" component={Stage1} />
-            <Route path="/stage2" component={Stage2} />
-            <Route path="/stage3" component={Stage3} />
-            <Route path="/stage4" component={Stage4} />
-            <Route path="/stage5" component={Stage5} />
-            <Route path="/stage6" component={Stage6} />
-            <Route path="/stage7" component={Stage7} />
-            <Route path="/stage8" component={Stage8} />
-            <Route path="/stage9" component={Stage9} />
-          </View>
+    return (  
+      
+      <View>
+        <NativeRouter>
+          <SkillSelect/>
         </NativeRouter>
       </View>
     );
@@ -235,6 +188,7 @@ const styles = StyleSheet.create({
   }
 });
 
+export default App;
   
 
 
