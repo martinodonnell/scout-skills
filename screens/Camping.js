@@ -2,7 +2,6 @@ import React, { Component }from 'react';
 import { StyleSheet, TouchableOpacity, Text, View,Image,Button } from 'react-native';
 import CheckBox from '../component/CheckBox'
 
-import SkillButton from '../component/SkillButton'
 
 export default class Camping extends Component{
 

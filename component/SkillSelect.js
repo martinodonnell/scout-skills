@@ -60,17 +60,18 @@ class SkillSelect extends Component {
                 <Text>Higher</Text>
               </Link>
             </View>
-
-            <Route exact path="/" component={Home} />
-            <Route path="/stage1" component={Stage1} />
-            <Route path="/stage2" component={Stage2} />
-            <Route path="/stage3" component={Stage3} />
-            <Route path="/stage4" component={Stage4} />
-            <Route path="/stage5" component={Stage5} />
-            <Route path="/stage6" component={Stage6} />
-            <Route path="/stage7" component={Stage7} />
-            <Route path="/stage8" component={Stage8} />
-            <Route path="/stage9" component={Stage9} />
+            <View>
+              <Route exact path="/" component={Home} />
+              <Route path="/stage1" component={Stage1} />
+              <Route path="/stage2" component={Stage2} />
+              <Route path="/stage3" component={Stage3} />
+              <Route path="/stage4" component={Stage4} />
+              <Route path="/stage5" component={Stage5} />
+              <Route path="/stage6" component={Stage6} />
+              <Route path="/stage7" component={Stage7} />
+              <Route path="/stage8" component={Stage8} />
+              <Route path="/stage9" component={Stage9} />
+            </View>
           </View>    
     );
   }
@@ -80,10 +81,10 @@ class SkillSelect extends Component {
 const styles = StyleSheet.create({
   container: {
     marginTop: 25,
-    padding: 10
-  },
-  header: {
-    fontSize: 20
+    padding: 10,
+    borderColor:'red',
+    borderRadius: 4,
+    borderWidth: 0.5,
   },
   nav: {
     flexDirection: "row",
@@ -96,10 +97,6 @@ const styles = StyleSheet.create({
   },
   subNavItem: {
     padding: 5
-  },
-  topic: {
-    textAlign: "center",
-    fontSize: 15
   }
 });
 
