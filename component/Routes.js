@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router, Scene } from 'react-native-router-flux'
 import Home from '../screens/Home'
-import SkillScreen from './SkillScreen'
+import SkillScreen from '../screens/SkillScreen'
 import { Actions } from 'react-native-router-flux';
 
 const Routes = () => (

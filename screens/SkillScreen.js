@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import { StyleSheet, View,Button,AsyncStorage,Text, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-import ListQuestions from './ListQuestions';
-import * as Constants from './Constants'
+import ListQuestions from '../component/ListQuestions';
+import * as Constants from '../component/Constants'
 
 
 export default class SkillScreen extends Component { 
