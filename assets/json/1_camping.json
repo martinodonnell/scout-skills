@@ -1,7 +1,7 @@
 {
     "questions":[
         [ 
-            {"id":100,"question":"1)I know the main personal gear to bring on camp.","checked":false},
+            {"id":100,"question":"I know the main personal gear to bring on camp.","checked":false},
             {"id":101,"question":"I know how to care for my personal camping gear","checked":true},
             {"id":102,"question":"I know what clothes I should bring on camp","checked":false},
             {"id":103,"question":"I know how to set out my sleeping area for a good night‘s sleep","checked":false},
@@ -15,7 +15,7 @@
             {"id":111,"question":"I have spent at least one night on camp","checked":false}
         ],
         [
-            {"id":201,"question":"2)I know about the food pyramid and can discuss it with a Scouter","checked":false},
+            {"id":201,"question":"I know about the food pyramid and can discuss it with a Scouter","checked":false},
             {"id":202,"question":"I know about food hygiene","checked":false},
             {"id":203,"question":"I can get a weather forecast","checked":false},
             {"id":204,"question":"I can help prepare food for cooking on camp","checked":false},
@@ -27,7 +27,7 @@
             {"id":210,"question":"I have spent at least two nights on camp (outside)","checked":false}
         ],
         [
-            {"id":301,"question":"3)I know how to care for all my personal gear","checked":false},
+            {"id":301,"question":"I know how to care for all my personal gear","checked":false},
             {"id":302,"question":"I know about safe food storage","checked":false},
             {"id":303,"question":"I can help make a hot drink using a fire","checked":false},
             {"id":304,"question":"I can help clean up a fireplace after camp","checked":false},
@@ -42,7 +42,7 @@
             {"id":313,"question":"I have spent at least two consecutive nights on camp","checked":false}
         ],
         [
-            {"id":401,"question":"4)I know what personal gear I should bring on a lightweight and standing camp","checked":false},
+            {"id":401,"question":"I know what personal gear I should bring on a lightweight and standing camp","checked":false},
             {"id":402,"question":"I can pack my rucksack properly for a lightweight camp.","checked":false},
             {"id":403,"question":"I know how to use our team gear correctly and safely.","checked":false},
             {"id":404,"question":"I know how to care for our team equipment during and in between camp.","checked":false},
@@ -55,7 +55,7 @@
             {"id":411,"question":"I have spent at least four nights on camp","checked":false}
         ],
         [
-            {"id":501,"question":"5)I know what you need for building shelters and bivvys.","checked":false},
+            {"id":501,"question":"I know what you need for building shelters and bivvys.","checked":false},
             {"id":502,"question":"I can explain how you choose the best type of tent for a specific camp.","checked":false},
             {"id":503,"question":"I know how to store and cook food safely on camp.","checked":false},
             {"id":504,"question":"I know what team equipment to bring on various types of camps.","checked":false},
@@ -74,7 +74,7 @@
             {"id":517,"question":"I have spent at least one night, lightweight camping","checked":false},
         ],
         [
-            {"id":601,"question":"6)I know how to plan the menu and purchase the food for a weekend camp.","checked":false},
+            {"id":601,"question":"I know how to plan the menu and purchase the food for a weekend camp.","checked":false},
             {"id":602,"question":"I can source local knowledge with regards to a campsite and surrounding area.","checked":false},
             {"id":603,"question":"I know how to plan a programme of activities for a camp.","checked":false},
             {"id":604,"question":"I know the causes and how to recognize and treat hypothermia, hyperthermia, sunstroke, dehydration and asthma, or any medical conditions relevant to my team.","checked":false},
@@ -89,7 +89,7 @@
             {"id":613,"question":"I have spent at least two consecutive nights lightweight camping.","checked":false},
         ],
         [
-            {"id":701,"question":"7)I know how to select a suitable location for both standing and lightweight camps.","checked":false},
+            {"id":701,"question":"I know how to select a suitable location for both standing and lightweight camps.","checked":false},
             {"id":702,"question":"I can plan and lead a team camp in a remote location for a minimum of two nights.","checked":false},
             {"id":703,"question":"I know how to organise the transport required for our camp.","checked":false},
             {"id":704,"question":"I know how to plan activities for various types of camps.","checked":false},
@@ -99,7 +99,7 @@
             {"id":708,"question":"I have spent at least 12 nights on various types of camps, including at least two consecutive nights without a Scouter. ","checked":false},
         ],
         [
-            {"id":801,"question":"8)I can prepare for a specialist expedition and have acquired the necessary skills","checked":false},
+            {"id":801,"question":"I can prepare for a specialist expedition and have acquired the necessary skills","checked":false},
             {"id":802,"question":"I can source, compare and organise various transport options for getting to local and foreign locations","checked":false},
             {"id":803,"question":"I know how to create an exciting expedition while catering for everyone’s needs.","checked":false},
             {"id":804,"question":"I know how to be active in the out of doors, without disturbing the balance of nature.","checked":false},
@@ -107,7 +107,7 @@
             {"id":806,"question":"I have spent at least 16 nights on various types of camps.","checked":false},
         ],
         [
-            {"id":901,"question":"9)I know how to budget, prepare and manage every aspect of the expedition.","checked":false},
+            {"id":901,"question":"I know how to budget, prepare and manage every aspect of the expedition.","checked":false},
             {"id":902,"question":"I know how to ensure that safety precautions are put in place, without curtailing the fun of our camp.","checked":false},
             {"id":903,"question":"I can plan and execute, camps and expeditions in all types of locations - at home or abroad.","checked":false},
             {"id":904,"question":"I know how to source amenities and local places of interest.","checked":false},
