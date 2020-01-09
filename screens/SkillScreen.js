@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View,Button,AsyncStorage,Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View,Button,AsyncStorage,Text, TouchableOpacity,ScrollView} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import ListQuestions from '../component/ListQuestions';
@@ -13,7 +13,7 @@ export default class SkillScreen extends Component {
     this.state = {
       questions:[],
       skill:this.props.skill,
-      level:this.props.level
+      level:this.props.level,
     }
   }
 
@@ -82,8 +82,16 @@ export default class SkillScreen extends Component {
         return <Text>Loading</Text>
     }else{
       return (  
-          <View>          
-              <ListQuestions questions={questions} skill={this.props.skill} level={level}/> 
+          <View style={styles.container}>  
+            <View style={styles.header}>
+              <Text style={[styles.headerText,{color:this.props.bgColour}]}>{this.state.skill} Level {this.props.level}</Text>      
+            </View>
+
+            <ScrollView style={styles.scroll}>  
+                <ListQuestions questions={questions} skill={this.props.skill} level={level}/> 
+            </ScrollView>
+            
+            <View style={styles.nav}>
               <Button
                 title="Complete"
                 onPress={()=>this.completeStage()}
@@ -99,6 +107,7 @@ export default class SkillScreen extends Component {
                 onPress={()=>this.higherLevel()}
             
               /> 
+            </View>
             
           </View>
         
@@ -109,6 +118,27 @@ export default class SkillScreen extends Component {
 }
 
 
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 25,
+    flex: 4,
+  },
+  headerText:{
+    fontSize:30,
+    fontFamily:'usuzi',
+  },
+  header:{
+    backgroundColor:'white',
+    alignItems:'center',
+  },
+  scroll:{
+  },
+  nav:{
+    flex: 1,
+    justifyContent: 'flex-end',
+    flexDirection: 'column',
+  }
+});
   
 
 

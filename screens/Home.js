@@ -13,17 +13,17 @@ export default class extends Component {
   render() {
      return (
         <View style = {styles.container}>
-            <SkillSelectButton skill={Constants.CAMPING}/>
-            <SkillSelectButton skill={Constants.BACKWOODS}/>
-            <SkillSelectButton skill={Constants.PIONEERING}/>
+            <SkillSelectButton skill={Constants.CAMPING} bgColor={'#009F54'}/>
+            <SkillSelectButton skill={Constants.BACKWOODS} bgColor={'#559632'}/>
+            <SkillSelectButton skill={Constants.PIONEERING} bgColor={'#004E50'}/>
             
-            <SkillSelectButton skill={Constants.EMERGENCIES}/>
-            <SkillSelectButton skill={Constants.HIKING}/>
-            <SkillSelectButton skill={Constants.AIR}/>
+            <SkillSelectButton skill={Constants.EMERGENCIES} bgColor={'#F57A41'}/>
+            <SkillSelectButton skill={Constants.HIKING} bgColor={'#F57921'}/>
+            <SkillSelectButton skill={Constants.AIR} bgColor={'#007CC2'}/>
 
-            <SkillSelectButton skill={Constants.PADDLING}/>
-            <SkillSelectButton skill={Constants.ROWING}/>
-            <SkillSelectButton skill={Constants.SAILING}/>
+            <SkillSelectButton skill={Constants.PADDLING} bgColor={'#0668B3'}/>
+            <SkillSelectButton skill={Constants.ROWING} bgColor={'#0668B3'}/>
+            <SkillSelectButton skill={Constants.SAILING} bgColor={'#0060AA'}/>
           
          </View>
       )
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     padding: 10,
     flex:1,
-    backgroundColor:'blue',
+    backgroundColor:'white',
 
   }
 });

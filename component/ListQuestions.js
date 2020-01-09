@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View,AsyncStorage } from 'react-native';
 import CheckBox from 'react-native-check-box'
 import * as Constants from './Constants'
+import Question from './Question'
 
 export default class ListQuestions extends Component { 
 
@@ -36,15 +37,53 @@ export default class ListQuestions extends Component {
         return (
             this.state.questions.questions[this.props.level-1].map((cb) => {
                 return (
-                   <View key={cb.id} style={{flexDirection: 'row', alignSelf: 'flex-start'}}>
-                        <CheckBox isChecked={cb.checked} onClick={()=>this.handleCheckBox(cb.id)}/>
-                        <Text>{cb.question}</Text>
-                    </View>                   
+                    <View  key={cb.id} style={styles.container} >
+                        <View style={styles.checkBoxContainer} >
+                            <CheckBox style={styles.checkBox} isChecked={cb.checked} onClick={()=>this.handleCheckBox(cb.id)} size={1}/>
+                        </View>
+
+                        <View style={styles.textContainer}>
+                            <Text style={styles.text}>{cb.question}</Text>
+                        </View>
+                        
+                    </View>  
+
+                                  
                 )
             })
         )
     }
 }
+
+
+const styles = StyleSheet.create({
+    container:{
+        flexDirection: 'row', 
+        borderColor:'black',
+        borderRadius: 10,
+        borderWidth: 2,
+        backgroundColor:'white',
+        marginHorizontal:10,
+        marginBottom:3,
+    }, 
+    checkBoxContainer:{
+        flex:1,
+        alignItems: 'center',
+        justifyContent:'center',
+    },   
+    checkBox:{
+        
+    },
+    textContainer:{
+        flex:4
+    },  
+    
+    text:{
+        fontSize:15
+    },   
+    
+})
+
 
 
 

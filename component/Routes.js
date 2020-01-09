@@ -8,7 +8,7 @@ const Routes = () => (
    <Router>
       <Scene key = "root">
          <Scene key = "home" hideNavBar={true} component = {Home} title = "Home" initial = {true} />
-         <Scene key = "skillScreen" component = {SkillScreen} title = "SkillScreen"/>
+         <Scene key = "skillScreen" hideNavBar={true} component = {SkillScreen} title = "SkillScreen"/>
 
       </Scene>
    </Router>

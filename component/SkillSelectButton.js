@@ -6,18 +6,14 @@ import { Actions } from 'react-native-router-flux';
 
 export default class extends Component { 
 
-  constructor(props){
-    super(props);  
-  }
-
   goToSkill = (skill) => {
-    Actions.skillScreen({skill:this.props.skill,level:1})
+    Actions.skillScreen({skill:this.props.skill,level:1,bgColour:this.props.bgColor})
   }
 
   render(){
     const {skill} = this.props.skill
     return (          
-        <TouchableOpacity style={styles.container} onPress = {()=> this.goToSkill()}>
+        <TouchableOpacity style={[styles.container, {backgroundColor: this.props.bgColor}]} onPress = {()=> this.goToSkill()}>
             <Text style={styles.text}>{this.props.skill}</Text>
         </TouchableOpacity>  
     );
@@ -27,12 +23,11 @@ export default class extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderColor:'white',
+    borderColor:'black',
     borderRadius: 10,
     borderWidth: 3,
     justifyContent: 'center',
     alignItems:'center',
-    backgroundColor:'red',
     marginTop:5
   },
   text: {
