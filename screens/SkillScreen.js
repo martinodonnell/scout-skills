@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import { StyleSheet, View,Button,AsyncStorage,Text, TouchableOpacity,ScrollView} from 'react-native';
+import { StyleSheet, View,Button,AsyncStorage,Text, TouchableOpacity,ScrollView,Image} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { FontAwesomeIcon,forward } from '@fortawesome/react-native-fontawesome'
+import { faHome,faForward,faBackward } from '@fortawesome/free-solid-svg-icons'
 
 import ListQuestions from '../component/ListQuestions';
 import * as Constants from '../component/Constants'
@@ -90,23 +92,17 @@ export default class SkillScreen extends Component {
             <ScrollView style={styles.scroll}>  
                 <ListQuestions questions={questions} skill={this.props.skill} level={level}/> 
             </ScrollView>
-            
-            <View style={styles.nav}>
-              <Button
-                title="Complete"
-                onPress={()=>this.completeStage()}
-            
-              /> 
-              <Button
-                title="Back"
-                onPress={()=>this.lowerLevel()}
-            
-              /> 
-              <Button
-                title="Forward"
-                onPress={()=>this.higherLevel()}
-            
-              /> 
+          
+            <View style={styles.nav2}>                
+                <TouchableOpacity style={styles.button} onPress={()=>this.lowerLevel()}>
+                    <FontAwesomeIcon icon={faBackward} size={ 25 }/>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={()=>this.completeStage()}>
+                    <FontAwesomeIcon icon={faHome} size={ 45 }/>
+                </TouchableOpacity>    
+                <TouchableOpacity style={styles.button} onPress={()=>this.higherLevel()}>                    
+                    <FontAwesomeIcon icon={faForward} size={ 25 } />
+                </TouchableOpacity>  
             </View>
             
           </View>
@@ -119,6 +115,20 @@ export default class SkillScreen extends Component {
 
 
 const styles = StyleSheet.create({
+  nav2:{
+    // flex: 1,
+    flexDirection: 'row',
+    // justifyContent:'center',
+    position: 'absolute', left: 0, right: 0, bottom: 0,
+  },
+  button:{
+    flex:1,
+    height:50,
+    justifyContent:'center',
+    alignItems:'center'
+
+    
+  },
   container: {
     marginTop: 25,
     flex: 4,
@@ -137,6 +147,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     flexDirection: 'column',
+  },
+  icon:{
+    height:50,
   }
 });
   

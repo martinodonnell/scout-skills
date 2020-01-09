@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View,AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View,AsyncStorage,TouchableWithoutFeedback } from 'react-native';
 import CheckBox from 'react-native-check-box'
 import * as Constants from './Constants'
 import Question from './Question'
@@ -37,17 +37,12 @@ export default class ListQuestions extends Component {
         return (
             this.state.questions.questions[this.props.level-1].map((cb) => {
                 return (
-                    <View  key={cb.id} style={styles.container} >
-                        <View style={styles.checkBoxContainer} >
-                            <CheckBox style={styles.checkBox} isChecked={cb.checked} onClick={()=>this.handleCheckBox(cb.id)} size={1}/>
-                        </View>
-
-                        <View style={styles.textContainer}>
-                            <Text style={styles.text}>{cb.question}</Text>
-                        </View>
-                        
-                    </View>  
-
+                        <TouchableWithoutFeedback key={cb.id}  onPress={()=>this.handleCheckBox(cb.id)}>
+                            <View style={styles.container}>
+                                <CheckBox style={styles.checkBox} isChecked={cb.checked} size={1} onClick={()=>this.handleCheckBox(cb.id)}/>
+                                <Text style={styles.text}>{cb.question}</Text>
+                            </View>
+                        </TouchableWithoutFeedback>  
                                   
                 )
             })
@@ -66,19 +61,15 @@ const styles = StyleSheet.create({
         marginHorizontal:10,
         marginBottom:3,
     }, 
-    checkBoxContainer:{
+     
+    checkBox:{
         flex:1,
         alignItems: 'center',
         justifyContent:'center',
-    },   
-    checkBox:{
-        
-    },
-    textContainer:{
-        flex:4
-    },  
+    },     
     
     text:{
+        flex:4,
         fontSize:15
     },   
     
