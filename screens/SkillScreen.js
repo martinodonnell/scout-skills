@@ -36,6 +36,7 @@ export default class SkillScreen extends Component {
 
   componentWillMount(){
     this.retrieveData();
+    console.log("Entering the " + this.state.skill + " at level " + this.state.level)
   }
 
   completeStage(){
