@@ -30,8 +30,7 @@ export default class SkillScreen extends Component {
         if (recieveQuestions !== null) {
           let jsonQuestions = JSON.parse(recieveQuestions);
           this.setState({ questions:jsonQuestions});
-
-          console.log(recieveQuestions)
+          console.log(jsonQuestions)
           //move to current level in use
           if(jsonQuestions.currentLevel!=1){
             this.setState({level:jsonQuestions.currentLevel})
@@ -42,7 +41,7 @@ export default class SkillScreen extends Component {
           alert(skill + " data not recieved");
         }
       } catch (e) {
-        alert('Failed to retrieve '+skill+'data.\n\n' + e)
+        alert('Failed to retrieve '+skill+'data.' + e)
       }
     }else{
       console.log(skill + " question already populated")
@@ -143,9 +142,11 @@ export default class SkillScreen extends Component {
               <Text style={[styles.headerText,{color:bgColor}]}>{this.state.skill} Level {level}</Text>      
             </View>
 
-            <ScrollView style={styles.scroll}>  
-                <ListQuestions questions={questions} skill={skill} level={level}/> 
-            </ScrollView>
+            <View style={styles.scroll}>
+                <ScrollView style={{borderRadius:0}}>  
+                    <ListQuestions questions={questions} skill={skill} level={level}/> 
+                </ScrollView>
+            </View>
           
             <View style={styles.nav}>                
                 <TouchableOpacity style={styles.button} onPress={()=>this.lowerLevel()}>
@@ -182,11 +183,15 @@ const styles = StyleSheet.create({
     alignItems:'center',
   },
   scroll:{
-
+    flex: 15,
+    backgroundColor:'white',
   },
   nav:{
     flexDirection: 'row',
-    position: 'absolute', left: 0, right: 0, bottom: 0,
+    // position: 'absolute', left: 0, right: 0, bottom: 0,
+    flex:1,
+    justifyContent:'flex-end',
+    backgroundColor:'white',
   },
   button:{
     flex:1,
