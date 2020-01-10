@@ -32,9 +32,9 @@ export default class SkillScreen extends Component {
           this.setState({ questions:jsonQuestions});
 
           // //move to current stage in use
-          if(jsonQuestions.currentStage!=1){
-            console.log("Recieved:" + jsonQuestions.currentStage)
-          //   this.setState({level:jsonQuestions.currentStage})
+          if(jsonQuestions.currentLevel!=1){
+            console.log("Recieved:" + jsonQuestions.currentLevel)
+            this.setState({level:jsonQuestions.currentLevel})
           }
 
           console.log("Data retrieved to state")
@@ -60,8 +60,8 @@ export default class SkillScreen extends Component {
   completeStage(){
 
     const {level,questions,skill} = this.state
-    var currentStage = questions.currentStage
-    if(currentStage==level){
+    var currentLevel = questions.currentLevel
+    if(currentLevel==level){
       let stageQuestions = questions.questions[level-1];
       for(i=0;i<stageQuestions.length;i++){
         if(stageQuestions[i].checked==false){
@@ -71,16 +71,16 @@ export default class SkillScreen extends Component {
       }
 
       //check we have not hit last level
-      var nextLevel = currentStage+1
+      var nextLevel = currentLevel+1
       if(nextLevel==9){
       //update current stage value in storage
-        this.updateCurrentStage()      
+        this.updatecurrentLevel()      
         this.refreshScreen(nextLevel)
       }else{
         alert("You have completed every level for " + skill + ", go have a party!!!. ")
       }
       return true;
-    }else if(level>currentStage){
+    }else if(level>currentLevel){
       alert("The previous levels need to be completed before ticking off level " + level)
     }else{
       alert("You have already completed this level")
@@ -89,10 +89,10 @@ export default class SkillScreen extends Component {
     
   }
 
-   updateCurrentStage(){
+   updatecurrentLevel(){
         const {level,questions} = this.state 
         var data = questions;
-        data.currentStage = level+1
+        data.currentLevel = level+1
 
         this.setState({questions:data});
         this.save(this.state.questions);
@@ -140,7 +140,7 @@ export default class SkillScreen extends Component {
          appReady ? (
           <View style={styles.container}>  
             <View style={styles.header}>
-              <Text style={[styles.headerText,{color:bgColor}]}>{this.state.skill} Level {level} {questions.currentStage}</Text>      
+              <Text style={[styles.headerText,{color:bgColor}]}>{this.state.skill} Level {level} {questions.currentLevel}</Text>      
             </View>
 
             <ScrollView style={styles.scroll}>  
