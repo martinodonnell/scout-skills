@@ -25,6 +25,11 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android":{
+      "package":"com.newryscouts.scoutskills",
+       "versionCode":1 , 
+       "icon":"./assets/badges/all-skills.png"
     }
   }
 }
