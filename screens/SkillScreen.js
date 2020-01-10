@@ -59,7 +59,7 @@ export default class SkillScreen extends Component {
 
   completeStage(){
 
-    const {level,questions} = this.state
+    const {level,questions,skill} = this.state
     var currentStage = questions.currentStage
     if(currentStage==level){
       let stageQuestions = questions.questions[level-1];
@@ -70,11 +70,15 @@ export default class SkillScreen extends Component {
         }
       }
 
+      //check we have not hit last level
+      var nextLevel = currentStage+1
+      if(nextLevel==9){
       //update current stage value in storage
-      this.updateCurrentStage()
-
-      //refersh to move to next level in skills
-      this.refreshScreen(currentStage+1)
+        this.updateCurrentStage()      
+        this.refreshScreen(nextLevel)
+      }else{
+        alert("You have completed every level for " + skill + ", go have a party!!!. ")
+      }
       return true;
     }else if(level>currentStage){
       alert("The previous levels need to be completed before ticking off level " + level)
