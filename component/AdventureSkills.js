@@ -8,19 +8,19 @@ export default class AdventureSkills extends Component{
         return (
           <View style={styles.container}>
             <View style={styles.rowContainer}>
-              <SkillButton img={require('../assets/badges/camping-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
-              <SkillButton img={require('../assets/badges/hiking-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
-              <SkillButton img={require('../assets/badges/backwoods-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
+              <SkillButton img={require('../assets/imgs/camping-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
+              <SkillButton img={require('../assets/imgs/hiking-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
+              <SkillButton img={require('../assets/imgs/backwoods-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
             </View>
             <View style={styles.rowContainer}>
-              <SkillButton img={require('../assets/badges/camping-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
-              <SkillButton img={require('../assets/badges/hiking-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
-              <SkillButton img={require('../assets/badges/backwoods-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
+              <SkillButton img={require('../assets/imgs/camping-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
+              <SkillButton img={require('../assets/imgs/hiking-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
+              <SkillButton img={require('../assets/imgs/backwoods-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
             </View>
             <View style={styles.rowContainer}>
-              <SkillButton img={require('../assets/badges/camping-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
-              <SkillButton img={require('../assets/badges/hiking-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
-              <SkillButton img={require('../assets/badges/backwoods-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
+              <SkillButton img={require('../assets/imgs/camping-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
+              <SkillButton img={require('../assets/imgs/hiking-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
+              <SkillButton img={require('../assets/imgs/backwoods-base.png')} nav={() => this.props.navigation.navigate('Camping')}/>
             </View>            
           </View>
         );
