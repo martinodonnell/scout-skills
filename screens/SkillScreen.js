@@ -21,6 +21,13 @@ export default class SkillScreen extends Component {
     }
   }
 
+
+  componentWillMount(){
+    this.retrieveData();
+    console.log("Entering the " + this.state.skill + " in level " + this.state.level)
+    
+  }
+
   retrieveData = async () => {
     
     const {skill,level,questions} = this.state
@@ -30,7 +37,6 @@ export default class SkillScreen extends Component {
         if (recieveQuestions !== null) {
           let jsonQuestions = JSON.parse(recieveQuestions);
           this.setState({ questions:jsonQuestions});
-          console.log(jsonQuestions)
           //move to current level in use
           if(jsonQuestions.currentLevel!=1){
             this.setState({level:jsonQuestions.currentLevel})
@@ -48,12 +54,6 @@ export default class SkillScreen extends Component {
     }
     this.setState({appReady:true})
 
-  }
-
-  componentWillMount(){
-    this.retrieveData();
-    console.log("Entering the " + this.state.skill + " in level " + this.state.level)
-    
   }
 
   completeLevel(){
@@ -129,7 +129,7 @@ export default class SkillScreen extends Component {
 
   render(){
     const {questions, level,skill,appReady} = this.state
-    const {bgColor} = this.props
+    const {textColor} = this.props
 
     
     if(questions.length==0){
@@ -139,7 +139,7 @@ export default class SkillScreen extends Component {
          appReady ? (
           <View style={styles.container}>  
             <View style={styles.header}>
-              <Text style={[styles.headerText,{color:bgColor}]}>{this.state.skill} Level {level}</Text>      
+              <Text style={[styles.headerText,{color:textColor}]}>{this.state.skill} Level {level}</Text>      
             </View>
 
             <View style={styles.scroll}>

@@ -7,7 +7,8 @@ import { Actions } from 'react-native-router-flux';
 export default class extends Component { 
 
   goToSkill = (skill) => {
-    Actions.skillScreen({skill:this.props.skill,level:1,bgColour:this.props.bgColor})
+    console.log(this.props.bgColor)
+    Actions.skillScreen({skill:this.props.skill,level:1,textColor:this.props.bgColor})
   }
 
   render(){
