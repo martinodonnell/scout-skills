@@ -1,4 +1,5 @@
 {
+    "currentStage":1,
     "questions":[
         [
             {"id":200,"question":"I know what kinds of clothes to wear when goingout into nature.","checked":false},

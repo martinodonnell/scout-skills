@@ -1,4 +1,5 @@
 {
+    "currentStage":1,
     "questions":[
         [
             {"id":301,"question":"I know what equipment is needed for making pioneering gadgets.","checked":false},

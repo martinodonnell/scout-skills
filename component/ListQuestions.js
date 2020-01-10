@@ -10,7 +10,8 @@ export default class ListQuestions extends Component {
         super(props);
 
         this.state = {
-            questions:this.props.questions
+            questions:this.props.questions,
+            skill:this.props.skill
         }
     }
 
@@ -24,11 +25,12 @@ export default class ListQuestions extends Component {
     }   
 
     save = async questions => {
+        const { skill } = this.state
         try {
-            await AsyncStorage.setItem('@' + Constants.CAMPING, JSON.stringify(questions))
-            console.log('Saved change in state');
+            await AsyncStorage.setItem('@' + skill,JSON.stringify(questions))
+            console.log('Saved ' + skill + ' changes');
         } catch (e) {
-            console.log('Failed saving changed state:' + Constants.CAMPING + " " + e);
+            console.log('Failed saving changed state for ' + skill + ":" + e);
         }
     }  
           

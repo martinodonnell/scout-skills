@@ -26,7 +26,6 @@ class App extends Component {
       this.save(require('./assets/json/7_paddling.json'),Constants.PADDLING);
       this.save(require('./assets/json/8_rowing.json'),Constants.ROWING);
       this.save(require('./assets/json/9_sailing.json'),Constants.SAILING);
-
       this.setState({ appReady: true });
 
    }

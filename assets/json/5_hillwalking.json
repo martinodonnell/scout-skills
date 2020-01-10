@@ -1,4 +1,5 @@
 {
+    "currentStage":1,
     "questions":[
         [
             {"id":501,"question":" can pack my rucksack for a day hike.","checked":false},
