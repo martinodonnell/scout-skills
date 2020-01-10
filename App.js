@@ -8,6 +8,7 @@ class App extends Component {
    
    state = {
     appReady: false,
+    dev:true
   };
 
 
@@ -33,7 +34,7 @@ class App extends Component {
    save = async (questions,skill) => {
       try {
          var isDataSaved =  await AsyncStorage.getItem('@' + skill)
-         if(!isDataSaved){
+         if(!isDataSaved || this.state.dev){
             await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
             console.log(skill + ' Data successfully saved!')
          }else{

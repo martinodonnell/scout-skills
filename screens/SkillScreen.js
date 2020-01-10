@@ -31,20 +31,21 @@ export default class SkillScreen extends Component {
           let jsonQuestions = JSON.parse(recieveQuestions);
           this.setState({ questions:jsonQuestions});
 
+          console.log(recieveQuestions)
           //move to current level in use
           if(jsonQuestions.currentLevel!=1){
             this.setState({level:jsonQuestions.currentLevel})
           }
 
-          console.log("Data retrieved to state")
+          console.log(skill + " data saved to state")
         }else{
-          alert("Data not recieved");
+          alert(skill + " data not recieved");
         }
       } catch (e) {
-        alert('Failed to retrieve data.\n\n' + e)
+        alert('Failed to retrieve '+skill+'data.\n\n' + e)
       }
     }else{
-      console.log("Question already populated")
+      console.log(skill + " question already populated")
     }
     this.setState({appReady:true})
 

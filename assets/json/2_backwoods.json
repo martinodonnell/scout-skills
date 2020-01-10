@@ -8,7 +8,7 @@
             {"id":203,"question":"I know how to behave safely around fires.","checked":false},
             {"id":204,"question":"I know how to use hand tools safely.","checked":false},
             {"id":205,"question":"I can build a simple shelter.","checked":false},
-            {"id":206,"question":"I have participated in at least two backwoods activities.","checked":false},
+            {"id":206,"question":"I have participated in at least two backwoods activities.","checked":false}
         ],
         [
             {"id":200,"question":"I know how cook some food using tin foil instead of pots and pans.","checked":false},
@@ -18,7 +18,7 @@
             {"id":204,"question":"I can prepare and cook food properly in backwoods conditions.","checked":false},
             {"id":205,"question":"I know about food hygiene in the outdoors","checked":false},
             {"id":206,"question":"I can use hand tools correctly.","checked":false},
-            {"id":207,"question":"I have attended at least an additional two backwoods activities.","checked":false},
+            {"id":207,"question":"I have attended at least an additional two backwoods activities.","checked":false}
         ],
         [
             {"id":201,"question":"I know how different weather conditions can affect a backwoods activity.","checked":false},
@@ -31,7 +31,7 @@
             {"id":208,"question":"I can make a simple fish hook.","checked":false},
             {"id":209,"question":"I can prepare my own survival kit.","checked":false},
             {"id":210,"question":"I can teach another Scout about preparing a survival kit.","checked":false},
-            {"id":211,"question":"I have attended at least an additional three backwoods activities.","checked":false},
+            {"id":211,"question":"I have attended at least an additional three backwoods activities.","checked":false}
         ],
         [
             {"id":201,"question":"I know what equipment I need to bring with me on a backwoods activity.","checked":false},
@@ -42,7 +42,7 @@
             {"id":206,"question":"I can make camp bread such as twists and scones.","checked":false},
             {"id":207,"question":"I know about nature and what you are likely to see and experience as part of a backwoods activity.","checked":false},
             {"id":208,"question":"I can find directions by using star constellations and the sun/watch method.","checked":false},
-            {"id":209,"question":"I have attended at least one backwoods based overnight activity.","checked":false},
+            {"id":209,"question":"I have attended at least one backwoods based overnight activity.","checked":false}
         ],
         [
             {"id":201,"question":"I know how to use and care for tools of all kinds safely.","checked":false},
@@ -53,7 +53,7 @@
             {"id":206,"question":"I can light a fire using flint and steel.","checked":false},
             {"id":207,"question":"I can make myself comfortable on an overnight backwoods adventure using available natural materials.","checked":false},
             {"id":208,"question":"I can carve a wooden spoon from a piece of wood.","checked":false},
-            {"id":209,"question":"I have attended backwoods based activities lasting at least two nights.","checked":false},
+            {"id":209,"question":"I have attended backwoods based activities lasting at least two nights.","checked":false}
         ],
         [
             {"id":201,"question":"I know what Team and personal equipment is necessary for a successful backwoods activity.","checked":false},
@@ -62,7 +62,7 @@
             {"id":204,"question":"I can prepare the foods I find in nature for cooking.","checked":false},
             {"id":205,"question":"I can find my way using natural direction indicators.","checked":false},
             {"id":206,"question":"I can catch and prepare a fish for cooking.","checked":false},
-            {"id":207,"question":"I have led at least one backwoods activity.","checked":false},
+            {"id":207,"question":"I have led at least one backwoods activity.","checked":false}
         ],
         [
             {"id":201,"question":"I know a number of ways of constructing shelters and bivvys.","checked":false},
@@ -71,7 +71,7 @@
             {"id":204,"question":"I know how to live in the countryside without disturbing the balance of nature in any way.","checked":false},
             {"id":205,"question":"I know how to make utensils by carving and by other methods.","checked":false},
             {"id":206,"question":"I can cook a meal without using common utensils.","checked":false},
-            {"id":207,"question":"I have led at least one overnight backwoods or survival based activity.","checked":false},
+            {"id":207,"question":"I have led at least one overnight backwoods or survival based activity.","checked":false}
         ],
         [
             {"id":201,"question":"I know a number of ways of constructing shelters capable of being used for a number of nights.","checked":false},
@@ -81,11 +81,11 @@
             {"id":205,"question":"I know how to make a variety of tools, and useful gadgets to survive in nature over a period of time.","checked":false},
             {"id":206,"question":"I can live comfortably in a number of different natural situations, with minimal equipment.","checked":false},
             {"id":207,"question":"I have led at least three backwoods adventures.","checked":false},
-            {"id":208,"question":"I have participated in a survival weekend activity.","checked":false},
+            {"id":208,"question":"I have participated in a survival weekend activity.","checked":false}
         ],
         [
             {"id":201,"question":"I have run at least two backwoods skills training sessions for my Scout Group/County.","checked":false},
-            {"id":202,"question":"I have participated in a survival activity outside my usual Scouting environment..","checked":false},
+            {"id":202,"question":"I have participated in a survival activity outside my usual Scouting environment..","checked":false}
         ]
     ]
 }

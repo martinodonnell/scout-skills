@@ -13,17 +13,17 @@ export default class extends Component {
   render() {
      return (
         <View style = {styles.container}>
-            <SkillSelectButton skill={Constants.CAMPING} bgColor={'#009F54'}/>
-            <SkillSelectButton skill={Constants.BACKWOODS} bgColor={'#559632'}/>
-            <SkillSelectButton skill={Constants.PIONEERING} bgColor={'#004E50'}/>
+            <SkillSelectButton skill={Constants.CAMPING} bgColor='#009F54'/>
+            <SkillSelectButton skill={Constants.BACKWOODS} bgColor='#559632'/>
+            <SkillSelectButton skill={Constants.PIONEERING} bgColor='#004E50'/>
             
-            <SkillSelectButton skill={Constants.EMERGENCIES} bgColor={'#F57A41'}/>
-            <SkillSelectButton skill={Constants.HIKING} bgColor={'#F57921'}/>
-            <SkillSelectButton skill={Constants.AIR} bgColor={'#007CC2'}/>
+            <SkillSelectButton skill={Constants.EMERGENCIES} bgColor='#F57A41'/>
+            <SkillSelectButton skill={Constants.HIKING} bgColor='#F57921'/>
+            <SkillSelectButton skill={Constants.AIR} bgColor='#007CC2'/>
 
-            <SkillSelectButton skill={Constants.PADDLING} bgColor={'#0668B3'}/>
-            <SkillSelectButton skill={Constants.ROWING} bgColor={'#0668B3'}/>
-            <SkillSelectButton skill={Constants.SAILING} bgColor={'#0060AA'}/>
+            <SkillSelectButton skill={Constants.PADDLING} bgColor='#0668B3'/>
+            <SkillSelectButton skill={Constants.ROWING} bgColor='#0668B3'/>
+            <SkillSelectButton skill={Constants.SAILING} bgColor='#0060AA'/>
           
          </View>
       )
