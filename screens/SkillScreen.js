@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { StyleSheet, View,Button,AsyncStorage,Text, TouchableOpacity,ScrollView,Image} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { FontAwesomeIcon,forward } from '@fortawesome/react-native-fontawesome'
-import { faHome,faForward,faBackward } from '@fortawesome/free-solid-svg-icons'
+import { faHome,faForward,faBackward,faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 import ListQuestions from '../component/ListQuestions';
 import * as Constants from '../component/Constants'
@@ -31,9 +31,8 @@ export default class SkillScreen extends Component {
           let jsonQuestions = JSON.parse(recieveQuestions);
           this.setState({ questions:jsonQuestions});
 
-          // //move to current stage in use
+          //move to current level in use
           if(jsonQuestions.currentLevel!=1){
-            console.log("Recieved:" + jsonQuestions.currentLevel)
             this.setState({level:jsonQuestions.currentLevel})
           }
 
@@ -53,19 +52,19 @@ export default class SkillScreen extends Component {
 
   componentWillMount(){
     this.retrieveData();
-    console.log("Entering the " + this.state.skill + " at level " + this.state.level)
+    console.log("Entering the " + this.state.skill + " in level " + this.state.level)
     
   }
 
-  completeStage(){
+  completeLevel(){
 
     const {level,questions,skill} = this.state
     var currentLevel = questions.currentLevel
     if(currentLevel==level){
-      let stageQuestions = questions.questions[level-1];
-      for(i=0;i<stageQuestions.length;i++){
-        if(stageQuestions[i].checked==false){
-          alert("Not all sections are completed for level " + level);
+      let levelQuestions = questions.questions[level-1];
+      for(i=0;i<levelQuestions.length;i++){
+        if(levelQuestions[i].checked==false){
+          alert("Not all sections are completed in level " + level);
           return false;
         }
       }
@@ -73,7 +72,7 @@ export default class SkillScreen extends Component {
       //check we have not hit last level
       var nextLevel = currentLevel+1
       if(nextLevel==9){
-      //update current stage value in storage
+      //update current level value in storage
         this.updatecurrentLevel()      
         this.refreshScreen(nextLevel)
       }else{
@@ -140,7 +139,7 @@ export default class SkillScreen extends Component {
          appReady ? (
           <View style={styles.container}>  
             <View style={styles.header}>
-              <Text style={[styles.headerText,{color:bgColor}]}>{this.state.skill} Level {level} {questions.currentLevel}</Text>      
+              <Text style={[styles.headerText,{color:bgColor}]}>{this.state.skill} Level {level}</Text>      
             </View>
 
             <ScrollView style={styles.scroll}>  
@@ -151,8 +150,8 @@ export default class SkillScreen extends Component {
                 <TouchableOpacity style={styles.button} onPress={()=>this.lowerLevel()}>
                     <FontAwesomeIcon icon={faBackward} size={ 25 }/>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={()=>this.completeStage()}>
-                    <FontAwesomeIcon icon={faHome} size={ 45 }/>
+                <TouchableOpacity style={styles.button} onPress={()=>this.completeLevel()}>
+                    <FontAwesomeIcon icon={faCheckCircle} size={ 45 }/>
                 </TouchableOpacity>    
                 <TouchableOpacity style={styles.button} onPress={()=>this.higherLevel()}>                    
                     <FontAwesomeIcon icon={faForward} size={ 25 } />

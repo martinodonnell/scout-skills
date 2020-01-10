@@ -32,8 +32,13 @@ class App extends Component {
 
    save = async (questions,skill) => {
       try {
-         await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
-         console.log(skill + ' Data successfully saved!')
+         var isDataSaved =  await AsyncStorage.getItem('@' + skill)
+         if(!isDataSaved){
+            await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
+            console.log(skill + ' Data successfully saved!')
+         }else{
+            console.log(skill + ' is already saved')
+         }
       } catch (e) {
          console.log('Failed to save.' + skill + ':' + e)
       }
