@@ -8,7 +8,7 @@ class App extends Component {
    
    state = {
     appReady: false,
-    dev:false
+    dev:true
   };
 
 
