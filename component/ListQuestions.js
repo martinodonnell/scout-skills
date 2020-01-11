@@ -11,17 +11,21 @@ export default class ListQuestions extends Component {
 
         this.state = {
             questions:this.props.questions,
-            skill:this.props.skill
+            skill:this.props.skill,
+            level:this.props.level
         }
     }
 
-    handleCheckBox(id){
-        var data = this.state.questions;
-        var index = data.questions[this.props.level-1].findIndex(x => x.id === id);
-
-        data.questions[this.props.level-1][index].checked = !data.questions[this.props.level-1][index].checked;
-        this.setState({questions:data});
-        this.save(this.state.questions);
+    handleCheckBox(id){        
+        const {questions,level} = this.state
+        if(level>=questions.currentLevel){
+            var index = questions.questions[level-1].findIndex(x => x.id === id);
+            questions.questions[level-1][index].checked = !questions.questions[level-1][index].checked;
+            this.setState({questions:questions});
+            this.save(questions);
+        }else{
+            console.log("You have already locked in this level")
+        }
     }   
 
     save = async questions => {
