@@ -71,7 +71,7 @@ export default class SkillScreen extends Component {
 
       //check we have not hit last level
       var nextLevel = currentLevel+1
-      if(nextLevel!=9){
+      if(nextLevel!=10){
       //update current level value in storage
         this.updatecurrentLevel()      
         this.refreshScreen(nextLevel)
