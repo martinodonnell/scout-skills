@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { StyleSheet, View,Button,AsyncStorage,Text, TouchableOpacity,ScrollView,Image} from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { FontAwesomeIcon,forward } from '@fortawesome/react-native-fontawesome'
-import { faHome,faForward,faBackward,faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faForward,faBackward,faCheckCircle as fasCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 
 import ListQuestions from '../component/ListQuestions';
 import * as Constants from '../component/Constants'
@@ -153,7 +154,7 @@ export default class SkillScreen extends Component {
                     <FontAwesomeIcon icon={faBackward} size={ 25 }/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={()=>this.completeLevel()}>
-                    <FontAwesomeIcon icon={faCheckCircle} size={ 45 }/>
+                    <FontAwesomeIcon icon={level>=questions.currentLevel ? farCheckCircle : fasCheckCircle} size={ 45 } mask={'fas'}/>
                 </TouchableOpacity>    
                 <TouchableOpacity style={styles.button} onPress={()=>this.higherLevel()}>                    
                     <FontAwesomeIcon icon={faForward} size={ 25 } />
