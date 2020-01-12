@@ -24,6 +24,7 @@
     "react-native-checkbox": "^2.0.0",
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.5.3",
+    "react-native-responsive-fontsize": "^0.4.2",
     "react-native-router-flux": "^4.0.6",
     "react-native-svg": "^10.0.0",
     "react-native-swiper": "^1.5.14",

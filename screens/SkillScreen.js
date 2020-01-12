@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faForward,faBackward,faCheckCircle as fasCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 import ListQuestions from '../component/ListQuestions';
 import * as Constants from '../component/Constants'
@@ -163,23 +164,23 @@ export default class SkillScreen extends Component {
         
       );
     }
-
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
     marginTop: 25,
-    flex: 4,
+    flex: 1,
   },
   headerText:{
-    fontSize:28,
+    fontSize:RFPercentage(3.5),
     fontFamily:'usuzi',
+    
   },
   header:{
     backgroundColor:'white',
     alignItems:'center',
+    flex:0.5
   },
   scroll:{
     flex: 15,
@@ -187,8 +188,7 @@ const styles = StyleSheet.create({
   },
   nav:{
     flexDirection: 'row',
-    // position: 'absolute', left: 0, right: 0, bottom: 0,
-    flex:1,
+    flex:1.5,
     justifyContent:'flex-end',
     backgroundColor:'white',
   },
