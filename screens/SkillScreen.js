@@ -72,14 +72,14 @@ export default class SkillScreen extends Component {
       }
 
       // //check we have not hit last level
-      // var nextLevel = currentLevel+1
-      // if(nextLevel!=10){
-      // //update current level value in storage
+      var nextLevel = currentLevel+1
+      if(nextLevel!=10){
+      //update current level value in storage
         this.updatecurrentLevel()      
-      //   this.refreshScreen(nextLevel)
-      // }else{
-      //   alert("You have completed every level for " + skill + ", go have a party!!!. ")
-      // }
+        this.refreshScreen(nextLevel)
+      }else{
+        alert("You have completed every level for " + skill + ", go have a party!!!. ")
+      }
       return true;
     }else if(level>currentLevel){
       alert("The previous levels need to be completed before ticking off level " + level)
@@ -90,30 +90,27 @@ export default class SkillScreen extends Component {
     
   }
 
-   updatecurrentLevel(){
-        const {level,questions} = this.state 
-        questions.currentLevel = level+1
-        this.save(questions);
-        this.setState({questions:questions});        
-    }   
-
-    save = async questions => {
-        const {skill} = this.state
-        try {
-            await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
-            console.log('Saved change in state');
-        } catch (e) {
-            console.log('Failed saving changed state:' + skill + " " + e);
-        }
-    }  
+  updatecurrentLevel(){
+      const {level,questions} = this.state 
+      questions.currentLevel = level+1
+      this.save(questions);
+      this.setState({questions:questions});        
+  }
 
   refreshScreen(newLevel){
-    const {skill,questions} = this.state;
-    const {textColor} = this.props
-
     //why do I need to set the state before refresh
     this.setState({level:newLevel})
-  }
+  }   
+
+  save = async questions => {
+      const {skill} = this.state
+      try {
+          await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
+          console.log('Saved change in state');
+      } catch (e) {
+          console.log('Failed saving changed state:' + skill + " " + e);
+      }
+  }   
 
   lowerLevel(){
     const {skill, level,questions} = this.state;
