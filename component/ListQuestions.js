@@ -12,12 +12,12 @@ export default class ListQuestions extends Component {
         this.state = {
             questions:this.props.questions,
             skill:this.props.skill,
-            level:this.props.level
         }
     }
 
     handleCheckBox(id){        
-        const {questions,level} = this.state
+        const {questions} = this.state
+        const {level} = this.props
         if(level>=questions.currentLevel){
             var index = questions.questions[level-1].findIndex(x => x.id === id);
             questions.questions[level-1][index].checked = !questions.questions[level-1][index].checked;
@@ -40,16 +40,17 @@ export default class ListQuestions extends Component {
           
     
     render (){
+        const {level} = this.props
+
         return (
-            this.state.questions.questions[this.props.level-1].map((cb) => {
+            this.state.questions.questions[level-1].map((cb) => {
                 return (
-                        <TouchableWithoutFeedback key={cb.id}  onPress={()=>this.handleCheckBox(cb.id)}>
-                            <View style={styles.container}>
-                                <CheckBox style={styles.checkBox} isChecked={cb.checked} size={1} onClick={()=>this.handleCheckBox(cb.id)}/>
-                                <Text style={styles.text}>{cb.question}</Text>
-                            </View>
-                        </TouchableWithoutFeedback>  
-                                  
+                    <TouchableWithoutFeedback key={cb.id}  onPress={()=>this.handleCheckBox(cb.id)}>
+                        <View style={styles.container}>
+                            <CheckBox style={styles.checkBox} isChecked={cb.checked} size={1} onClick={()=>this.handleCheckBox(cb.id)}/>
+                            <Text style={styles.text}>{cb.question}</Text>
+                        </View>
+                    </TouchableWithoutFeedback>                                    
                 )
             })
         )

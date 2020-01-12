@@ -18,7 +18,6 @@ export default class SkillScreen extends Component {
       skill:this.props.skill,
       level:this.props.level,
       appReady: false,
-
     }
   }
 
@@ -32,13 +31,15 @@ export default class SkillScreen extends Component {
   retrieveData = async () => {
     
     const {skill,level,questions} = this.state
-    if(Array.isArray(questions) && questions.length==0){
+    // if(Array.isArray(questions) && questions.length==0){
+    if(true){
       try {
         const recieveQuestions = await AsyncStorage.getItem('@' + skill);
         if (recieveQuestions !== null) {
           let jsonQuestions = JSON.parse(recieveQuestions);
           this.setState({ questions:jsonQuestions});
-          //move to current level in use
+          console.log("Moving "+skill+" current Level: " + jsonQuestions.currentLevel)
+          // move to the next level to achieve
           if(jsonQuestions.currentLevel!=1){
             this.setState({level:jsonQuestions.currentLevel})
           }
@@ -70,15 +71,15 @@ export default class SkillScreen extends Component {
         }
       }
 
-      //check we have not hit last level
-      var nextLevel = currentLevel+1
-      if(nextLevel!=10){
-      //update current level value in storage
+      // //check we have not hit last level
+      // var nextLevel = currentLevel+1
+      // if(nextLevel!=10){
+      // //update current level value in storage
         this.updatecurrentLevel()      
-        this.refreshScreen(nextLevel)
-      }else{
-        alert("You have completed every level for " + skill + ", go have a party!!!. ")
-      }
+      //   this.refreshScreen(nextLevel)
+      // }else{
+      //   alert("You have completed every level for " + skill + ", go have a party!!!. ")
+      // }
       return true;
     }else if(level>currentLevel){
       alert("The previous levels need to be completed before ticking off level " + level)
@@ -91,27 +92,27 @@ export default class SkillScreen extends Component {
 
    updatecurrentLevel(){
         const {level,questions} = this.state 
-        var data = questions;
-        data.currentLevel = level+1
-
-        this.setState({questions:data});
-        this.save(this.state.questions);
+        questions.currentLevel = level+1
+        this.save(questions);
+        this.setState({questions:questions});        
     }   
 
     save = async questions => {
+        const {skill} = this.state
         try {
-            await AsyncStorage.setItem('@' + Constants.CAMPING, JSON.stringify(questions))
+            await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
             console.log('Saved change in state');
         } catch (e) {
-            console.log('Failed saving changed state:' + Constants.CAMPING + " " + e);
+            console.log('Failed saving changed state:' + skill + " " + e);
         }
     }  
 
   refreshScreen(newLevel){
     const {skill,questions} = this.state;
+    const {textColor} = this.props
+
     //why do I need to set the state before refresh
     this.setState({level:newLevel})
-    Actions.refresh({key: 'skillScreen',skill:skill,level:newLevel,questions:questions})
   }
 
   lowerLevel(){

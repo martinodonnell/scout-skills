@@ -6,15 +6,15 @@ import { Actions } from 'react-native-router-flux';
 
 export default class extends Component { 
 
-  goToSkill = (skill) => {
-    console.log(this.props.bgColor)
-    Actions.skillScreen({skill:this.props.skill,level:1,textColor:this.props.bgColor})
+  goToSkill(){
+    const {skill,textColor} = this.props
+    Actions.skillScreen({skill:skill,level:1,textColor:textColor})
   }
 
   render(){
-    const {skill} = this.props.skill
+    const {skill,textColor} = this.props
     return (          
-        <TouchableOpacity style={[styles.container, {backgroundColor: this.props.bgColor}]} onPress = {()=> this.goToSkill()}>
+        <TouchableOpacity style={[styles.container, {backgroundColor: textColor}]} onPress = {()=> this.goToSkill()}>
             <Text style={styles.text}>{this.props.skill}</Text>
         </TouchableOpacity>  
     );
