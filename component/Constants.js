@@ -7,3 +7,12 @@ export const AIR= "Air";
 export const PADDLING= "Paddling";
 export const ROWING= "Rowing";
 export const SAILING= "Sailing";
+
+
+//Secout sections
+export const SCOUT= "Scout";
+export const CUB= "Cub";
+export const BEAVER= "Beaver";
+export const VENTURE= "Venture";
+export const LEADER= "Leader";
+

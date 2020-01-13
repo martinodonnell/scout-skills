@@ -4,11 +4,13 @@ import { Actions } from 'react-native-router-flux';
 import * as Constants from '../component/Constants';
 import SkillSelectButton from '../component/SkillSelectButton';
 
-const goToSkill = (skill) => {
-   Actions.skillScreen({skill:skill,level:1})
-}
 
+const goToUserSelect = () => {
+    Actions.userSelect()
+  } 
 export default class extends Component {   
+
+  
 
   render() {
      return (
@@ -24,6 +26,9 @@ export default class extends Component {
             <SkillSelectButton skill={Constants.PADDLING} textColor='#0668B3'/>
             <SkillSelectButton skill={Constants.ROWING} textColor='#0668B3'/>
             <SkillSelectButton skill={Constants.SAILING} textColor='#0060AA'/>
+            <TouchableOpacity onPress={goToUserSelect}>
+              <Text>Users</Text>
+            </TouchableOpacity>  
           
          </View>
       )
