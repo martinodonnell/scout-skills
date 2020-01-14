@@ -1,6 +1,7 @@
 import React, { Component }from 'react';
 import { StyleSheet, Text, View,Image,Button,TouchableOpacity,TextInput} from 'react-native';
-import {firebase} from '../../constants/FireBaseConfig';
+import {db,auth} from '../../constants/FireBaseConfig';
+import { Actions } from 'react-native-router-flux';
 
 export default class extends Component{
 
@@ -10,9 +11,9 @@ export default class extends Component{
             email:"martin@test.com",
             password:"testtest123",
             section:"Scout",
-            groupID:"1001",
+            groupID:1001,
             loading:false,
-            errorMessage:"test",
+            errorMessage:"",
 
         };
    }
@@ -20,15 +21,15 @@ export default class extends Component{
    async signUp(){
       this.setState({loading:true,errorMessage:""})
       const {email,password,groupID,section} = this.state
-      await firebase.auth().createUserWithEmailAndPassword(email,password).then(()=> {
-          userId = firebase.auth().currentUser.uid
-          firebase.database().ref('users/' + userId).set({
+      await auth.createUserWithEmailAndPassword(email,password).then(()=> {
+          userId = auth.currentUser.uid
+          db.ref('users/' + userId).set({
             groupID: groupID,
             section:section
             
           }).then(function() {
             console.log("user details successfully added")
-
+            Actions.home()
 
           }).catch((error) =>{
             // Handle Errors here.
@@ -53,17 +54,16 @@ export default class extends Component{
     async signIn(){
       this.setState({loading:true,errorMessage:""})
       const {email,password,groupID,section} = this.state
-      
-      await firebase.auth().signInWithEmailAndPassword(email,password).then(()=> {
+
+      await auth.signInWithEmailAndPassword(email,password).then(()=> {
           console.log("User signed in");
+          Actions.home()
       }).catch((error) =>{
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log("Error adding new user" + errorCode +":"+errorMessage)
             this.setState({errorMessage})
-
-
       });
       this.setState({loading:false})
 
@@ -88,10 +88,10 @@ export default class extends Component{
               />
             </View>
             <TouchableOpacity style={styles.button} onPress = {()=> this.signIn()} disabled={this.state.loading}>
-              <Text>Sing In</Text>
+              <Text>Sign In</Text>
             </TouchableOpacity> 
             <TouchableOpacity style={styles.button} onPress = {()=> this.signUp()} disabled={this.state.loading}>
-              <Text>Sing Up</Text>
+              <Text>Sign Up</Text>
             </TouchableOpacity>  
             <View>
               <Text>{this.state.errorMessage}</Text>

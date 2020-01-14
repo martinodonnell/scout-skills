@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry,StyleSheet, View,AsyncStorage,Text} from 'react-native';
 import * as Constants from '../component/Constants'
 import * as Font from 'expo-font';
-import {firebase} from '../constants/FireBaseConfig';
+import {db} from '../constants/FireBaseConfig';
 import UserCard from '../component/UserCard'
 
 class App extends Component {
@@ -10,31 +10,23 @@ class App extends Component {
    constructor(props){
         super(props);
         this.state = {
-            users:[]
+            users:[],
+            groupID:1001
         };
-     
-        this.readUserData()
-        this.login()
    }
 
    readUserData() {
-        firebase.database().ref('/users').on('value', snapshot => {
+       const {groupID} = this.state
+        db.ref('/users').orderByChild('groupID').equalTo(groupID).on('value', (snapshot) => {
             let data = snapshot.val();
             let users = Object.values(data);
+            console.log("got Users: " + users)
             this.setState({ users });
-        });
+        })
     }
 
-    login(){
-        firebase.auth().signInWithEmailAndPassword("email@emailcom", "password").catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log("errorCode:" + errorCode)
-            console.log("errorCode:" + errorMessage)
-
-        });
-
+    componentWillMount(){
+        this.readUserData();
     }
 
    render() {
