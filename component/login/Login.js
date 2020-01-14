@@ -18,8 +18,8 @@ export default class extends Component{
    }
 
    async signUp(){
-      const {email,password,groupID,section} = this.state
       this.setState({loading:true,errorMessage:""})
+      const {email,password,groupID,section} = this.state
       await firebase.auth().createUserWithEmailAndPassword(email,password).then(()=> {
           userId = firebase.auth().currentUser.uid
           firebase.database().ref('users/' + userId).set({
@@ -51,8 +51,20 @@ export default class extends Component{
     }
 
     async signIn(){
-      this.setState({loading:true})
-      console.log("hello")
+      this.setState({loading:true,errorMessage:""})
+      const {email,password,groupID,section} = this.state
+      
+      await firebase.auth().signInWithEmailAndPassword(email,password).then(()=> {
+          console.log("User signed in");
+      }).catch((error) =>{
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log("Error adding new user" + errorCode +":"+errorMessage)
+            this.setState({errorMessage})
+
+
+      });
       this.setState({loading:false})
 
     }
