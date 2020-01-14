@@ -3,6 +3,7 @@ import { AppRegistry, View,AsyncStorage,Text} from 'react-native';
 import Routes from './component/Routes.js'
 import * as Constants from './component/Constants'
 import * as Font from 'expo-font';
+import {db,auth} from './constants/FireBaseConfig'
 
 class App extends Component {
    
@@ -30,10 +31,22 @@ class App extends Component {
       this.save(require('./assets/json/9_sailing.json'),Constants.SAILING);
       this.save(require('./assets/json/10_currentLevels.json'),Constants.CURRENTLEVELS);
 
+      this.signIn();
       this.setState({ appReady: true });
 
    }
 
+   signIn(){
+      auth.signInWithEmailAndPassword("martin@test.com","testtest123").then(()=> {
+            console.log("User signed in");
+      }).catch((error) =>{
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log("Error adding new user" + errorCode +":"+errorMessage)
+      });
+
+   }
    async save(questions,skill){
       try {
          var isDataSaved =  await AsyncStorage.getItem('@' + skill)

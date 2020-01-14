@@ -19,6 +19,7 @@ export default class ListQuestions extends Component {
     handleCheckBox(id){        
         const {questions,currentLevel} = this.state
         const {level} = this.props
+        console.log(level +":"+currentLevel)
         if(level>=currentLevel){
             var index = questions.questions[level-1].findIndex(x => x.id === id);
             questions.questions[level-1][index].checked = !questions.questions[level-1][index].checked;

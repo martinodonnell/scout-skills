@@ -27,9 +27,9 @@ export default class SkillScreen extends Component {
   async componentWillMount(){
     //do this better some time
     await this.retrieveQuestions();
-    await this.retrieveCurrentLevel();
     await this.retrieveAnswers();
-    
+    await this.retrieveCurrentLevel().then(()=>console.log("Got CUrrent Levels"))
+
     this.setState({appReady:true})
     console.log("Entering the " + this.state.skill + " in level " + this.state.level)   
 
@@ -57,18 +57,13 @@ export default class SkillScreen extends Component {
 
   async retrieveCurrentLevel(){    
       const {skill} = this.state
-      try {
-        const output = await AsyncStorage.getItem('@' + Constants.CURRENTLEVELS);
-        if (output !== null) {
-          let currentLevels = JSON.parse(output);
+      userId = auth.currentUser.uid
+      return db.ref('/users/' + userId + "/currentLevels").on('value', (snapshot) => {
+          let currentLevels = snapshot.val();
           this.setState({ currentLevels,level:currentLevels[skill]});    
-
-        }else{
-          alert(Constants.CURRENTLEVELS + " data not recieved");
-        }
-      } catch (e) {
-        alert('Failed to retrieve '+Constants.CURRENTLEVELS+'data.' + e)
-      }
+          console.log("got current levels: ")
+      })
+      
   }
 
   async retrieveAnswers(){

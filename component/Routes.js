@@ -13,7 +13,7 @@ const Routes = () => (
          <Scene key = "home" hideNavBar={true} component = {Home} title = "Home" initial = {true}/>
          <Scene key = "skillScreen" hideNavBar={true} component = {SkillScreen} title = "SkillScreen"/>
          <Scene key = "userSelect" hideNavBar={true} component = {UserSelect} title = "UserSelect" />
-         <Scene key = "login" hideNavBar={true} component = {Login} title = "UserSelect" initial = {true} />
+         <Scene key = "login" hideNavBar={true} component = {Login} title = "UserSelect" />
 
       </Scene>
    </Router>
