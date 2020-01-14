@@ -28,6 +28,7 @@ export default class SkillScreen extends Component {
     //do this better some time
     await this.retrieveQuestions();
     await this.retrieveCurrentLevel();
+    await this.retrieveAnswers();
     
     this.setState({appReady:true})
     console.log("Entering the " + this.state.skill + " in level " + this.state.level)   
@@ -69,6 +70,29 @@ export default class SkillScreen extends Component {
         alert('Failed to retrieve '+Constants.CURRENTLEVELS+'data.' + e)
       }
   }
+
+  async retrieveAnswers(){
+    const {skill,questions} = this.state
+      try {
+        const output = await AsyncStorage.getItem('@' + skill + "A");
+        if (output !== null) {
+          let currentAnswers = JSON.parse(output).answers;
+          for(x in currentAnswers){
+            for(y in currentAnswers[x]){
+              if(currentAnswers[x][y].checked){
+                bagdeID = Math.floor(currentAnswers[x][y].id/100)-1
+                questionID = currentAnswers[x][y].id%100
+                questions.questions[bagdeID][questionID].checked = true
+              }
+            }
+          }
+        }else{
+          alert(Constants.skill + " answers not recieved");
+        }
+      } catch (e) {
+        alert('Failed to retrieve '+Constants.skill+'data.' + e)
+      }
+  }
   
 
   completeLevel(){
@@ -99,8 +123,7 @@ export default class SkillScreen extends Component {
     }else{
       alert("You have already completed this level")
     }
-    return false
-    
+    return false    
   }
 
   updatecurrentLevel(){

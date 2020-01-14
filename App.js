@@ -19,6 +19,7 @@ class App extends Component {
 
       //need to wait for these to happen before continuing
       this.save(require('./assets/json/1_camping.json'),Constants.CAMPING);
+      this.save(require('./assets/json/1_camping_answers.json'),Constants.CAMPING + "A");//testing 
       this.save(require('./assets/json/2_backwoods.json'),Constants.BACKWOODS);
       this.save(require('./assets/json/3_pioneering.json'),Constants.PIONEERING);
       this.save(require('./assets/json/4_emergencies.json'),Constants.EMERGENCIES);
