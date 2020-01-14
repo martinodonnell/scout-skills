@@ -23,10 +23,11 @@ export default class extends Component{
       const {email,password,groupID,section} = this.state
       await auth.createUserWithEmailAndPassword(email,password).then(()=> {
           userId = auth.currentUser.uid
+          currentLevels =require('../../assets/json/10_currentLevels.json')
           db.ref('users/' + userId).set({
             groupID: groupID,
-            section:section
-            
+            section:section,
+            currentLevels:currentLevels,            
           }).then(function() {
             console.log("user details successfully added")
             Actions.home()

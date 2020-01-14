@@ -34,7 +34,7 @@ class App extends Component {
 
    }
 
-   save = async (questions,skill) => {
+   async save(questions,skill){
       try {
          var isDataSaved =  await AsyncStorage.getItem('@' + skill)
          if(!isDataSaved || this.state.dev){

@@ -8,7 +8,7 @@ import { RFPercentage } from "react-native-responsive-fontsize";
 
 import ListQuestions from '../component/ListQuestions';
 import * as Constants from '../component/Constants'
-
+import {db,auth} from '../constants/FireBaseConfig'
 
 export default class SkillScreen extends Component { 
 

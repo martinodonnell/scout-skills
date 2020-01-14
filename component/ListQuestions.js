@@ -29,7 +29,7 @@ export default class ListQuestions extends Component {
         }
     }   
 
-    save = async questions => {
+    async save(questions){
         const { skill } = this.state
         try {
             await AsyncStorage.setItem('@' + skill,JSON.stringify(questions))
