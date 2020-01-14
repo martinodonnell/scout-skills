@@ -36,7 +36,7 @@ class App extends Component {
          var isDataSaved =  await AsyncStorage.getItem('@' + skill)
          if(!isDataSaved || this.state.dev){
             await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
-            console.log(skill + ' Data successfully saved!')
+            // console.log(skill + ' Data successfully saved!')
          }else{
             console.log(skill + ' is already saved')
          }
