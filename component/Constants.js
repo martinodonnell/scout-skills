@@ -7,7 +7,7 @@ export const AIR= "Air";
 export const PADDLING= "Paddling";
 export const ROWING= "Rowing";
 export const SAILING= "Sailing";
-
+export const CURRENTLEVELS = "CurrentLevel"
 
 //Secout sections
 export const SCOUT= "Scout";

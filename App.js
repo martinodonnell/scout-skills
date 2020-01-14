@@ -8,7 +8,7 @@ class App extends Component {
    
    state = {
     appReady: false,
-    dev:false
+    dev:true
   };
 
 
@@ -27,6 +27,8 @@ class App extends Component {
       this.save(require('./assets/json/7_paddling.json'),Constants.PADDLING);
       this.save(require('./assets/json/8_rowing.json'),Constants.ROWING);
       this.save(require('./assets/json/9_sailing.json'),Constants.SAILING);
+      this.save(require('./assets/json/10_currentLevels.json'),Constants.CURRENTLEVELS);
+
       this.setState({ appReady: true });
 
    }

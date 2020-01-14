@@ -17,34 +17,31 @@ export default class SkillScreen extends Component {
     this.state = {
       questions:this.props.questions || [],
       skill:this.props.skill,
+      currentLevels:this.props.questions || [],
       level:this.props.level,
       appReady: false,
     }
   }
 
 
-  componentWillMount(){
-    this.retrieveData();
-    console.log("Entering the " + this.state.skill + " in level " + this.state.level)
+  async componentWillMount(){
+    //do this better some time
+    await this.retrieveQuestions();
+    await this.retrieveCurrentLevel();
     
+    this.setState({appReady:true})
+    console.log("Entering the " + this.state.skill + " in level " + this.state.level)   
+
   }
 
-  retrieveData = async () => {
-    
-    const {skill,level,questions} = this.state
-    // if(Array.isArray(questions) && questions.length==0){
-    if(true){
+  async retrieveQuestions(){    
+    const {skill,questions} = this.state
+    if(Array.isArray(questions) && questions.length==0){
       try {
-        const recieveQuestions = await AsyncStorage.getItem('@' + skill);
-        if (recieveQuestions !== null) {
-          let jsonQuestions = JSON.parse(recieveQuestions);
+        const result = await AsyncStorage.getItem('@' + skill);
+        if (result !== null) {
+          let jsonQuestions = JSON.parse(result);
           this.setState({ questions:jsonQuestions});
-          console.log("Moving "+skill+" current Level: " + jsonQuestions.currentLevel)
-          // move to the next level to achieve
-          if(jsonQuestions.currentLevel!=1){
-            this.setState({level:jsonQuestions.currentLevel})
-          }
-
           console.log(skill + " data saved to state")
         }else{
           alert(skill + " data not recieved");
@@ -55,14 +52,29 @@ export default class SkillScreen extends Component {
     }else{
       console.log(skill + " question already populated")
     }
-    this.setState({appReady:true})
-
   }
+
+  async retrieveCurrentLevel(){    
+      const {skill} = this.state
+      try {
+        const output = await AsyncStorage.getItem('@' + Constants.CURRENTLEVELS);
+        if (output !== null) {
+          let currentLevels = JSON.parse(output);
+          this.setState({ currentLevels,level:currentLevels[skill]});    
+
+        }else{
+          alert(Constants.CURRENTLEVELS + " data not recieved");
+        }
+      } catch (e) {
+        alert('Failed to retrieve '+Constants.CURRENTLEVELS+'data.' + e)
+      }
+  }
+  
 
   completeLevel(){
 
-    const {level,questions,skill} = this.state
-    var currentLevel = questions.currentLevel
+    const {level,questions,skill,currentLevels} = this.state
+    var currentLevel = currentLevels[skill]
     if(currentLevel==level){
       let levelQuestions = questions.questions[level-1];
       for(i=0;i<levelQuestions.length;i++){
@@ -92,24 +104,22 @@ export default class SkillScreen extends Component {
   }
 
   updatecurrentLevel(){
-      const {level,questions} = this.state 
-      questions.currentLevel = level+1
-      this.save(questions);
-      this.setState({questions:questions});        
+      const {currentLevels,skill} = this.state 
+      currentLevels[skill] = currentLevels[skill]+1
+      this.save(currentLevels,Constants.CURRENTLEVELS);
+      this.setState({currentLevels:currentLevels});        
   }
 
   refreshScreen(newLevel){
-    //why do I need to set the state before refresh
     this.setState({level:newLevel})
   }   
 
-  save = async questions => {
-      const {skill} = this.state
+  async save(data,key){
       try {
-          await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
+          await AsyncStorage.setItem('@' + key, JSON.stringify(data))
           console.log('Saved change in state');
       } catch (e) {
-          console.log('Failed saving changed state:' + skill + " " + e);
+          console.log('Failed saving changed state:' + key + " " + e);
       }
   }   
 
@@ -128,7 +138,7 @@ export default class SkillScreen extends Component {
   }
 
   render(){
-    const {questions, level,skill,appReady} = this.state
+    const {questions, level,skill,appReady,currentLevels} = this.state
     const {textColor} = this.props
 
     
@@ -144,7 +154,7 @@ export default class SkillScreen extends Component {
 
             <View style={styles.scroll}>
                 <ScrollView style={{borderRadius:0}}>  
-                    <ListQuestions questions={questions} skill={skill} level={level}/> 
+                    <ListQuestions questions={questions} skill={skill} level={level} currentLevel={currentLevels[skill]}/> 
                 </ScrollView>
             </View>
           
@@ -153,7 +163,7 @@ export default class SkillScreen extends Component {
                     <FontAwesomeIcon icon={faBackward} size={ 25 }/>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={()=>this.completeLevel()}>
-                    <FontAwesomeIcon icon={level>=questions.currentLevel ? farCheckCircle : fasCheckCircle} size={ 45 } mask={'fas'}/>
+                    <FontAwesomeIcon icon={level>=currentLevels[skill] ? farCheckCircle : fasCheckCircle} size={ 45 } mask={'fas'}/>
                 </TouchableOpacity>    
                 <TouchableOpacity style={styles.button} onPress={()=>this.higherLevel()}>                    
                     <FontAwesomeIcon icon={faForward} size={ 25 } />
