@@ -20,18 +20,24 @@ export default class SkillScreen extends Component {
       currentLevels:this.props.questions || [],
       level:this.props.level,
       appReady: false,
+      userId:auth.currentUser.uid
+
     }
   }
 
 
   async componentWillMount(){
     //do this better some time
-    await this.retrieveQuestions();
-    await this.retrieveAnswers();
-    await this.retrieveCurrentLevel().then(()=>console.log("Got CUrrent Levels"))
+    var test1=  await this.retrieveQuestions();
+    var test2 = await this.retrieveAnswers();
+    var test3 = this.retrieveCurrentLevel()
+    Promise.all([test1,test2,test3]).then(()=>{
 
-    this.setState({appReady:true})
-    console.log("Entering the " + this.state.skill + " in level " + this.state.level)   
+      //do a check incase data is not there. If not error out
+      this.setState({appReady:true})
+      console.log("Entering the " + this.state.skill + " in level " + this.state.level)   
+    })  
+   
 
   }
 
@@ -43,7 +49,7 @@ export default class SkillScreen extends Component {
         if (result !== null) {
           let jsonQuestions = JSON.parse(result);
           this.setState({ questions:jsonQuestions});
-          console.log(skill + " data saved to state")
+          console.log(skill + " data retrieved and saved to state")
         }else{
           alert(skill + " data not recieved");
         }
@@ -56,12 +62,11 @@ export default class SkillScreen extends Component {
   }
 
   async retrieveCurrentLevel(){    
-      const {skill} = this.state
-      userId = auth.currentUser.uid
+      const {skill,userId} = this.state
       return db.ref('/users/' + userId + "/currentLevels").on('value', (snapshot) => {
           let currentLevels = snapshot.val();
-          this.setState({ currentLevels,level:currentLevels[skill]});    
-          console.log("got current levels: ")
+          this.setState({ currentLevels,level:currentLevels[skill]});  
+          console.log(currentLevels)  
       })
       
   }
@@ -124,8 +129,16 @@ export default class SkillScreen extends Component {
   updatecurrentLevel(){
       const {currentLevels,skill} = this.state 
       currentLevels[skill] = currentLevels[skill]+1
-      this.save(currentLevels,Constants.CURRENTLEVELS);
-      this.setState({currentLevels:currentLevels});        
+      this.setState({currentLevels:currentLevels});  
+      this.saveCurrentLevel()      
+  }
+
+  async saveCurrentLevel(){
+    const {userId,skill,currentLevels}=this.state
+    obj = {} 
+    obj[skill] = currentLevels[skill]
+    db.ref("users/"+userId+"/currentLevels").update(obj);
+
   }
 
   refreshScreen(newLevel){
@@ -165,7 +178,8 @@ export default class SkillScreen extends Component {
     }else{
       return (  
          appReady ? (
-          <View style={styles.container}>  
+          <View style={styles.container}> 
+            <Text>{currentLevels[skill]}</Text>
             <View style={styles.header}>
               <Text style={[styles.headerText,{color:textColor}]}>{this.state.skill} Level {level}</Text>      
             </View>
