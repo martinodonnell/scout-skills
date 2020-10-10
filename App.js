@@ -1,44 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { AppRegistry, View, AsyncStorage, Text } from 'react-native';
 import Routes from './component/Routes.js'
 import * as Constants from './component/Constants'
 import * as Font from 'expo-font';
 
-class App extends Component {
-   state = {
-      appReady: false,
-      dev: true
-   };
+const App = () => {
+   const [appReady, setAppReady] = useState(false)
 
-   async componentWillMount() {
-      await Font.loadAsync({
-         'usuzi': require('./assets/fonts/usuzi.ttf'),
-      });
+   useEffect(() => {
+      const setup = async () => {
+         await Font.loadAsync({
+            'usuzi': require('./assets/fonts/usuzi.ttf'),
+         });
 
-      //need to wait for these to happen before continuing
-      this.save(require('./assets/json/1_camping.json'), Constants.CAMPING);
-      this.save(require('./assets/json/1_camping_answers.json'), Constants.CAMPING + "A");//testing 
-      this.save(require('./assets/json/2_backwoods.json'), Constants.BACKWOODS);
-      this.save(require('./assets/json/3_pioneering.json'), Constants.PIONEERING);
-      this.save(require('./assets/json/4_emergencies.json'), Constants.EMERGENCIES);
-      this.save(require('./assets/json/5_hillwalking.json'), Constants.HIKING);
-      this.save(require('./assets/json/6_air.json'), Constants.AIR);
-      this.save(require('./assets/json/7_paddling.json'), Constants.PADDLING);
-      this.save(require('./assets/json/8_rowing.json'), Constants.ROWING);
-      this.save(require('./assets/json/9_sailing.json'), Constants.SAILING);
-      this.save(require('./assets/json/10_currentLevels.json'), Constants.CURRENTLEVELS);
+         save(require('./assets/json/1_camping.json'), Constants.CAMPING);
+         save(require('./assets/json/1_camping_answers.json'), Constants.CAMPING + "A");//testing 
+         save(require('./assets/json/2_backwoods.json'), Constants.BACKWOODS);
+         save(require('./assets/json/3_pioneering.json'), Constants.PIONEERING);
+         save(require('./assets/json/4_emergencies.json'), Constants.EMERGENCIES);
+         save(require('./assets/json/5_hillwalking.json'), Constants.HIKING);
+         save(require('./assets/json/6_air.json'), Constants.AIR);
+         save(require('./assets/json/7_paddling.json'), Constants.PADDLING);
+         save(require('./assets/json/8_rowing.json'), Constants.ROWING);
+         save(require('./assets/json/9_sailing.json'), Constants.SAILING);
+         save(require('./assets/json/10_currentLevels.json'), Constants.CURRENTLEVELS);
 
-      // this.signIn();
-      this.setState({ appReady: true });
+         setAppReady(true)
+      }
+      setup()
 
-   }
+   }, [])
 
-   async save(questions, skill) {
+   const save = async (questions, skill) => {
       try {
          var isDataSaved = await AsyncStorage.getItem('@' + skill)
-         if (!isDataSaved || this.state.dev) {
+         if (!isDataSaved) {
             await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
-            // console.log(skill + ' Data successfully saved!')
          } else {
             console.log(skill + ' is already saved')
          }
@@ -47,16 +44,11 @@ class App extends Component {
       }
    }
 
-   render() {
-      return (
-         this.state.appReady ? (
-            <Routes />
-         ) : null
-      )
-   }
+   return (
+      appReady ? (
+         <Routes />
+      ) : null
+   )
 }
+
 export default App
-
-
-
-

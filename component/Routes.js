@@ -2,8 +2,6 @@ import React from 'react'
 import { Router, Scene } from 'react-native-router-flux'
 import Home from '../screens/Home'
 import { SkillScreen } from '../screens/SkillScreen'
-import UserSelect from '../screens/UserSelect'
-import Login from '../component/login/Login'
 
 const Routes = () => (
    <Router>

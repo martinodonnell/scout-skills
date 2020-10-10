@@ -1,11 +1,11 @@
 {
-    "Camping":1,
-    "Backwoods":1,
-    "Pioneering":1,
-    "Emergencies":1,
-    "HikingWalking":1,
-    "Air":1,
-    "Paddling":1,
-    "Rowing":1,
-    "Sailing":1
+    "Camping": 0,
+    "Backwoods": 0,
+    "Pioneering": 0,
+    "Emergencies": 0,
+    "HikingWalking": 0,
+    "Air": 0,
+    "Paddling": 0,
+    "Rowing": 0,
+    "Sailing": 0
 }
