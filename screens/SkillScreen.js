@@ -1,99 +1,58 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { StyleSheet, View, Button, AsyncStorage, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faForward, faBackward, faCheckCircle as fasCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 import { RFPercentage } from "react-native-responsive-fontsize";
-import ListQuestions from '../component/ListQuestions';
+import { ListQuestions } from '../component/ListQuestions';
 import * as Constants from '../component/Constants'
 
-export default class SkillScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      questions: this.props.questions || [],
-      skill: this.props.skill,
-      currentLevels: this.props.questions || [],
-      level: this.props.level,
-      appReady: false,
+export const SkillScreen = ({ skill }) => {
+  const [questions, setQuestions] = useState([])
+  const [currentLevels, setCurrentLevels] = useState([])
+  const [level, setLevel] = useState(1)
+  const [appReady, setAppReady] = useState(false)
+
+  useEffect(() => {
+    const setUp = async () => {
+      retrieveCurrentLevel()
+      setHeaderTitle(level)
+      await retrieveQuestions()
+
+      setAppReady(true)
+      console.log("Entering the " + skill + " in level " + level)
     }
-  }
+    setUp()
+  }, [skill])
 
-  async componentWillMount() {
-    //do this better some time
-    var test1 = await this.retrieveQuestions();
-    var test2 = await this.retrieveAnswers();
-    var test3 = this.retrieveCurrentLevel()
-    Promise.all([test1, test2, test3]).then(() => {
-      //do a check incase data is not there. If not error out
-      this.setState({ appReady: true })
-      console.log("Entering the " + this.state.skill + " in level " + this.state.level)
-    })
-  }
 
-  async retrieveQuestions() {
-    const { skill, questions } = this.state
-    if (Array.isArray(questions) && questions.length == 0) {
-      try {
-        const result = await AsyncStorage.getItem('@' + skill);
-        if (result !== null) {
-          let jsonQuestions = JSON.parse(result);
-          this.setState({ questions: jsonQuestions });
-          console.log(skill + " data retrieved and saved to state")
-        } else {
-          alert(skill + " data not recieved");
-        }
-      } catch (e) {
-        alert('Failed to retrieve ' + skill + 'data.' + e)
+  const retrieveQuestions = async () => {
+    try {
+      const result = await AsyncStorage.getItem('@' + skill);
+      if (result !== null) {
+        await setQuestions(JSON.parse(result));
       }
-    } else {
-      console.log(skill + " question already populated")
+    } catch (e) {
+      console.log('Failed to retrieve ' + skill + 'data.' + e)
     }
   }
 
-  async retrieveCurrentLevel() {
-    const { skill } = this.state
+  const retrieveCurrentLevel = async () => {
     try {
       const output = await AsyncStorage.getItem('@' + Constants.CURRENTLEVELS);
       if (output !== null) {
-        let currentLevels = JSON.parse(output);
-        console.log(currentLevels, currentLevels[skill])
-        this.setState({ currentLevels, skill, level: currentLevels[skill] });
+        setCurrentLevels(JSON.parse(output))
+        setLevel(currentLevels[skill])
       } else {
         alert(Constants.CURRENTLEVELS + " data not recieved");
       }
     } catch (e) {
-      alert('Failed to retrieve ' + Constants.CURRENTLEVELS + 'data.' + e)
+      console.log('Failed to retrieve ' + Constants.CURRENTLEVELS + 'data.' + e)
     }
   }
 
-  async retrieveAnswers() {
-    const { skill, questions } = this.state
-    try {
-      const output = await AsyncStorage.getItem('@' + skill + "A");
-      if (output !== null) {
-        let currentAnswers = JSON.parse(output).answers;
-        for (x in currentAnswers) {
-          for (y in currentAnswers[x]) {
-            if (currentAnswers[x][y].checked) {
-              bagdeID = Math.floor(currentAnswers[x][y].id / 100) - 1
-              questionID = currentAnswers[x][y].id % 100
-              questions.questions[bagdeID][questionID].checked = true
-            }
-          }
-        }
-      } else {
-        alert(Constants.skill + " answers not recieved");
-      }
-    } catch (e) {
-      alert('Failed to retrieve ' + Constants.skill + 'data.' + e)
-    }
-  }
-
-
-  completeLevel() {
-    const { level, questions, skill, currentLevels } = this.state
+  const completeLevel = () => {
     var currentLevel = currentLevels[skill]
     if (currentLevel == level) {
       let levelQuestions = questions.questions[level - 1];
@@ -104,12 +63,12 @@ export default class SkillScreen extends Component {
         }
       }
 
-      // //check we have not hit last level
+      //check we have not hit last level
       var nextLevel = currentLevel + 1
       if (nextLevel != 10) {
         //update current level value in storage
-        this.updatecurrentLevel()
-        this.refreshScreen(nextLevel)
+        updatecurrentLevel()
+        refreshScreen(nextLevel)
       } else {
         alert("You have completed every level for " + skill + ", go have a party!!!. ")
       }
@@ -122,75 +81,60 @@ export default class SkillScreen extends Component {
     return false
   }
 
-  updatecurrentLevel() {
-    const { currentLevels, skill } = this.state
+  const updatecurrentLevel = () => {
     currentLevels[skill] = currentLevels[skill] + 1
-    this.setState({ currentLevels: currentLevels });
+    setCurrentLevels(currentLevels)
   }
 
-  refreshScreen(newLevel) {
-    this.setState({ level: newLevel })
+  const refreshScreen = (newLevel) => {
+    setLevel(newLevel)
+    setHeaderTitle(newLevel)
   }
 
-  async save(data, key) {
-    try {
-      await AsyncStorage.setItem('@' + key, JSON.stringify(data))
-      console.log('Saved change in state');
-    } catch (e) {
-      console.log('Failed saving changed state:' + key + " " + e);
-    }
+  const setHeaderTitle = (newLevel) => {
+    const title = `${skill} Level ${newLevel}`
+    Actions.refresh({ title: title })
   }
 
-  lowerLevel() {
-    const { skill, level, questions } = this.state;
+  const lowerLevel = () => {
     if (level > 1) {
-      this.refreshScreen(level - 1)
+      refreshScreen(level - 1)
     }
   }
 
-  higherLevel() {
-    const { skill, level, questions } = this.state;
+  const higherLevel = () => {
     if (level < 9) {
-      this.refreshScreen(level + 1)
+      refreshScreen(level + 1)
     }
   }
 
-  render() {
-    const { questions, level, skill, appReady, currentLevels } = this.state
-    const { textColor } = this.props
-
-    if (questions.length == 0) {
-      return <Text>Loading</Text>
-    } else {
-      return (
-        appReady ? (
-          <View style={styles.container}>
-            <View style={styles.header}>
-              <Text style={[styles.headerText, { color: textColor }]}>{this.state.skill} Level {level}</Text>
-            </View>
-
-            <View style={styles.scroll}>
-              <ScrollView style={{ borderRadius: 0 }}>
-                <ListQuestions questions={questions} skill={skill} level={level} currentLevel={currentLevels[skill]} />
-              </ScrollView>
-            </View>
-
-            <View style={styles.nav}>
-              <TouchableOpacity style={styles.button} onPress={() => this.lowerLevel()}>
-                <FontAwesomeIcon icon={faBackward} size={25} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={() => this.completeLevel()}>
-                <FontAwesomeIcon icon={level >= currentLevels[skill] ? farCheckCircle : fasCheckCircle} size={45} mask={'fas'} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={() => this.higherLevel()}>
-                <FontAwesomeIcon icon={faForward} size={25} />
-              </TouchableOpacity>
-            </View>
+  if (questions.length == 0) {
+    return <Text>Loading</Text>
+  } else {
+    return (
+      appReady ? (
+        <View style={styles.container}>
+          <View style={styles.scroll}>
+            <ScrollView style={{ borderRadius: 0 }}>
+              <ListQuestions questions={questions} skill={skill} level={1} currentLevel={currentLevels[skill]} />
+            </ScrollView>
           </View>
-        ) : null
 
-      );
-    }
+          <View style={styles.nav}>
+            <TouchableOpacity style={styles.button} onPress={() => lowerLevel()}>
+              <FontAwesomeIcon icon={faBackward} size={25} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => completeLevel()}>
+              <FontAwesomeIcon icon={level >= currentLevels[skill] ? farCheckCircle : fasCheckCircle} size={45} mask={'fas'} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => higherLevel()}>
+              <FontAwesomeIcon icon={faForward} size={25} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : null
+
+    );
   }
 }
 
@@ -203,11 +147,6 @@ const styles = StyleSheet.create({
     fontSize: RFPercentage(3.5),
     fontFamily: 'usuzi',
 
-  },
-  header: {
-    backgroundColor: 'white',
-    alignItems: 'center',
-    flex: 0.5
   },
   scroll: {
     flex: 15,
@@ -226,9 +165,3 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 });
-
-
-
-
-
-

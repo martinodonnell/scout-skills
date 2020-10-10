@@ -6,7 +6,7 @@ export default class extends Component {
 
   goToSkill() {
     const { skill, textColor } = this.props
-    Actions.skillScreen({ skill: skill, level: 1, textColor: textColor })
+    Actions.skillScreen({ skill: skill, textColor: textColor })
   }
 
   render() {

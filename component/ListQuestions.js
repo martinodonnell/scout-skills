@@ -1,36 +1,31 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, AsyncStorage, TouchableWithoutFeedback } from 'react-native';
 import CheckBox from 'react-native-check-box'
-import * as Constants from './Constants'
-import Question from './Question'
 
-export default class ListQuestions extends Component {
+export const ListQuestions = (props) => {
+    const [questions, setQuestions] = useState(props.questions)
+    const { level, skill, currentLevel } = props
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            questions: this.props.questions,
-            currentLevel: this.props.currentLevel,
-            skill: this.props.skill,
-        }
-    }
+    useEffect(() => {
+        console.log("Hello")
+    }, [questions])
 
-    handleCheckBox(id) {
-        const { questions, currentLevel } = this.state
-        const { level } = this.props
-        console.log(level + ":" + currentLevel)
+    const handleCheckBox = (id) => {
+        console.log(id)
         if (level >= currentLevel) {
-            var index = questions.questions[level - 1].findIndex(x => x.id === id);
-            questions.questions[level - 1][index].checked = !questions.questions[level - 1][index].checked;
-            this.setState({ questions: questions });
-            this.save(questions);
+            const questionTemp = questions
+            const index = questions.questions[level - 1].findIndex(x => x.id === id);
+
+            questionTemp.questions[level - 1][index].checked = !questions.questions[level - 1][index].checked;
+
+            setQuestions(questionTemp)
+            save(questionTemp);
         } else {
             console.log("This level is locked because it has been completed")
         }
     }
 
-    async save(questions) {
-        const { skill } = this.state
+    const save = async (questions) => {
         try {
             await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
             console.log('Saved ' + skill + ' changes');
@@ -39,23 +34,19 @@ export default class ListQuestions extends Component {
         }
     }
 
+    return (
+        questions && questions.questions[level - 1].map((cb) => {
+            return (
+                <TouchableWithoutFeedback key={cb.id} onPress={() => handleCheckBox(cb.id)}>
+                    <View style={styles.container}>
+                        <CheckBox style={styles.checkBox} isChecked={cb.checked} size={1} onClick={() => handleCheckBox(cb.id)} />
+                        <Text style={styles.text}>{cb.question}</Text>
+                    </View>
+                </TouchableWithoutFeedback>
+            )
+        })
+    )
 
-    render() {
-        const { level } = this.props
-
-        return (
-            this.state.questions.questions[level - 1].map((cb) => {
-                return (
-                    <TouchableWithoutFeedback key={cb.id} onPress={() => this.handleCheckBox(cb.id)}>
-                        <View style={styles.container}>
-                            <CheckBox style={styles.checkBox} isChecked={cb.checked} size={1} onClick={() => this.handleCheckBox(cb.id)} />
-                            <Text style={styles.text}>{cb.question}</Text>
-                        </View>
-                    </TouchableWithoutFeedback>
-                )
-            })
-        )
-    }
 }
 
 
