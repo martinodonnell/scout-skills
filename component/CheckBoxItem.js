@@ -25,12 +25,20 @@ export const CheckBoxItem = ({ cb, onChange, disabled }) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        borderColor: 'black',
+        borderLeftWidth: 5,
+        borderLeftColor: '#FF8846',
+        borderWidth: 0.8,
         borderRadius: 10,
-        borderWidth: 2,
+        borderRightColor: 'grey',
+        borderTopColor: 'grey',
+        borderBottomColor: 'grey',
         backgroundColor: 'white',
-        marginHorizontal: 10,
-        marginBottom: 3,
+
+        marginHorizontal: 20,
+        marginVertical: 3,
+
+        paddingVertical: 10,
+        paddingHorizontal: 5
     },
 
     checkBox: {
@@ -38,7 +46,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-
     text: {
         flex: 4,
         fontSize: 15

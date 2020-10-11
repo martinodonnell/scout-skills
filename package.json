@@ -36,7 +36,8 @@
     "react-navigation-stack": "^1.10.3",
     "react-router-dom": "^5.1.2",
     "react-router-native": "^5.1.2",
-    "react-native-reanimated": "~1.13.0"
+    "react-native-reanimated": "~1.13.0",
+    "expo-status-bar": "~1.0.2"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.3.0"

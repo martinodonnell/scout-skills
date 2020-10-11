@@ -3,6 +3,8 @@ import { AppRegistry, View, AsyncStorage, Text } from 'react-native';
 import Routes from './navigation/Routes';
 import * as Font from 'expo-font';
 import { setUpInitalFiles } from './services/AsyncService';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
 
 const App = () => {
    const [appReady, setAppReady] = useState(false)
@@ -21,7 +23,10 @@ const App = () => {
 
    return (
       appReady && (
-         <Routes />
+         <SafeAreaProvider>
+            <Routes />
+            <StatusBar style="light" />
+         </SafeAreaProvider>
       )
    )
 }

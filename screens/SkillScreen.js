@@ -126,13 +126,26 @@ export const SkillScreen = ({ skill }) => {
 
           <View style={styles.nav}>
             <TouchableOpacity style={styles.button} onPress={() => lowerLevel()}>
-              <FontAwesomeIcon icon={faBackward} size={25} />
+              <FontAwesomeIcon
+                icon={faBackward}
+                size={25}
+                color='white'
+              />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => completeLevel()}>
-              <FontAwesomeIcon icon={level >= currentLevels[skill] ? farCheckCircle : fasCheckCircle} size={45} mask={'fas'} />
+              <FontAwesomeIcon
+                icon={level >= currentLevels[skill] ? farCheckCircle : fasCheckCircle}
+                size={45}
+                mask={'fas'}
+                color='white'
+              />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => higherLevel()}>
-              <FontAwesomeIcon icon={faForward} size={25} />
+              <FontAwesomeIcon
+                icon={faForward}
+                size={25}
+                color='white'
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -144,7 +157,7 @@ export const SkillScreen = ({ skill }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 25,
+    // marginTop: 25,
     flex: 1,
   },
   headerText: {
@@ -158,9 +171,11 @@ const styles = StyleSheet.create({
   },
   nav: {
     flexDirection: 'row',
-    flex: 1.5,
-    justifyContent: 'flex-end',
-    backgroundColor: 'white',
+    flex: 1.3,
+    justifyContent: 'center',
+    backgroundColor: '#FF8846',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   button: {
     flex: 1,

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as Constants from "../component/Constants";
 import SkillSelectButton from "../component/SkillSelectButton";
 
