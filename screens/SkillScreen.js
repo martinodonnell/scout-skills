@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Button, AsyncStorage, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -7,21 +7,20 @@ import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-i
 import { RFPercentage } from "react-native-responsive-fontsize";
 import { ListQuestions } from '../component/ListQuestions';
 import * as Constants from '../component/Constants'
+import { saveQuestion } from '../services/AsyncService';
 
 export const SkillScreen = ({ skill }) => {
   const [questions, setQuestions] = useState([])
   const [currentLevels, setCurrentLevels] = useState([])
-  const [level, setLevel] = useState(1)
+  const [level, setLevel] = useState(0)
   const [appReady, setAppReady] = useState(false)
 
   useEffect(() => {
     const setUp = async () => {
-      retrieveCurrentLevel()
-      setHeaderTitle(level)
+      await retrieveCurrentLevel()
       await retrieveQuestions()
 
       setAppReady(true)
-      console.log("Entering the " + skill + " in level " + level)
     }
     setUp()
   }, [skill])
@@ -42,8 +41,11 @@ export const SkillScreen = ({ skill }) => {
     try {
       const output = await AsyncStorage.getItem('@' + Constants.CURRENTLEVELS);
       if (output !== null) {
-        setCurrentLevels(JSON.parse(output))
-        setLevel(currentLevels[skill])
+        const jsonOutput = JSON.parse(output)
+        await setCurrentLevels(jsonOutput)
+        await setLevel(parseInt(jsonOutput[skill]))
+        setHeaderTitle(jsonOutput[skill])
+
       } else {
         alert(Constants.CURRENTLEVELS + " data not recieved");
       }
@@ -53,12 +55,13 @@ export const SkillScreen = ({ skill }) => {
   }
 
   const completeLevel = () => {
-    var currentLevel = currentLevels[skill]
+    const currentLevel = currentLevels[skill]
+    const displayLevel = level + 1
     if (currentLevel == level) {
-      let levelQuestions = questions.questions[level - 1];
-      for (i = 0; i < levelQuestions.length; i++) {
+      let levelQuestions = questions.questions[level];
+      for (var i = 0; i < levelQuestions.length; i++) {
         if (levelQuestions[i].checked == false) {
-          alert("Not all sections are completed in level " + level);
+          alert("Not all sections are completed in level " + displayLevel);
           return false;
         }
       }
@@ -67,45 +70,46 @@ export const SkillScreen = ({ skill }) => {
       var nextLevel = currentLevel + 1
       if (nextLevel != 10) {
         //update current level value in storage
-        updatecurrentLevel()
+        updateCurrentLevel()
         refreshScreen(nextLevel)
       } else {
         alert("You have completed every level for " + skill + ", go have a party!!!. ")
       }
       return true;
     } else if (level > currentLevel) {
-      alert("The previous levels need to be completed before ticking off level " + level)
+      alert("The previous levels need to be completed before ticking off level " + displayLevel)
     } else {
       alert("You have already completed this level")
     }
     return false
   }
 
-  const updatecurrentLevel = () => {
-    currentLevels[skill] = currentLevels[skill] + 1
+  const updateCurrentLevel = () => {
+    currentLevels[skill] += 1
     setCurrentLevels(currentLevels)
-  }
-
-  const refreshScreen = (newLevel) => {
-    setLevel(newLevel)
-    setHeaderTitle(newLevel)
+    saveQuestion(currentLevels, Constants.CURRENTLEVELS)
   }
 
   const setHeaderTitle = (newLevel) => {
-    const title = `${skill} Level ${newLevel}`
+    const title = `${skill} Level ${newLevel + 1}`
     Actions.refresh({ title: title })
   }
 
   const lowerLevel = () => {
-    if (level > 1) {
+    if (level > 0) {
       refreshScreen(level - 1)
     }
   }
 
   const higherLevel = () => {
-    if (level < 9) {
+    if (level < 8) {
       refreshScreen(level + 1)
     }
+  }
+
+  const refreshScreen = (newLevel) => {
+    setLevel(newLevel)
+    setHeaderTitle(newLevel)
   }
 
   if (questions.length == 0) {
@@ -116,7 +120,7 @@ export const SkillScreen = ({ skill }) => {
         <View style={styles.container}>
           <View style={styles.scroll}>
             <ScrollView style={{ borderRadius: 0 }}>
-              <ListQuestions questions={questions} skill={skill} level={1} currentLevel={currentLevels[skill]} />
+              <ListQuestions questions={questions} skill={skill} level={level} currentLevel={currentLevels[skill]} />
             </ScrollView>
           </View>
 

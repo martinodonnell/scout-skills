@@ -15,7 +15,7 @@ export const CheckBoxItem = ({ cb, onChange, disabled }) => {
     return (
         <TouchableWithoutFeedback key={cb.id} onPress={() => onClick()}>
             <View style={styles.container}>
-                <CheckBox style={styles.checkBox} isChecked={isChecked} size={1} onClick={() => onClick} />
+                <CheckBox style={styles.checkBox} isChecked={isChecked} size={1} onClick={() => onClick()} />
                 <Text style={styles.text}>{cb.question}</Text>
             </View>
         </TouchableWithoutFeedback>
