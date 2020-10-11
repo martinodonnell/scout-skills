@@ -1,7 +1,30 @@
 import { AsyncStorage } from 'react-native';
 import * as Constants from '../component/Constants';
 
-const saveQuestionIfNotThere = async (questions, skill) => {
+const skillJsonFiles = [
+    { path: require('../assets/json/1_camping.json'), skill: Constants.CAMPING },
+    { path: require('../assets/json/2_backwoods.json'), skill: Constants.BACKWOODS },
+    { path: require('../assets/json/3_pioneering.json'), skill: Constants.PIONEERING },
+    { path: require('../assets/json/4_emergencies.json'), skill: Constants.EMERGENCIES },
+    { path: require('../assets/json/5_hillwalking.json'), skill: Constants.HIKING },
+    { path: require('../assets/json/6_air.json'), skill: Constants.AIR },
+    { path: require('../assets/json/7_paddling.json'), skill: Constants.PADDLING },
+    { path: require('../assets/json/8_rowing.json'), skill: Constants.ROWING },
+    { path: require('../assets/json/9_sailing.json'), skill: Constants.SAILING },
+    { path: require('../assets/json/10_currentLevels.json'), skill: Constants.CURRENTLEVELS }
+]
+
+const overwriteSpecificJsonFile = async (skill) => {
+    for (var x of skillJsonFiles) {
+        if (x.skill === skill) {
+            return saveQuestion(x.path, x.skill)
+        }
+    }
+    console.log("Error while saving new version of json file")
+
+}
+
+const saveJSONFile = async (questions, skill) => {
     try {
         var isDataSaved = await AsyncStorage.getItem('@' + skill)
         if (!isDataSaved) {
@@ -24,21 +47,10 @@ const saveQuestion = async (questions, skill) => {
 }
 
 const setUpInitalFiles = () => {
-    const skillJsonFiles = [
-        { path: './assets/json/1_camping.json', skill: Constants.CAMPING },
-        { path: './assets/json/2_backwoods.json', skill: Constants.BACKWOODS },
-        { path: './assets/json/3_pioneering.json', skill: Constants.PIONEERING },
-        { path: './assets/json/4_emergencies.json', skill: Constants.EMERGENCIES },
-        { path: './assets/json/5_hillwalking.json', skill: Constants.HIKING },
-        { path: './assets/json/6_air.json', skill: Constants.AIR },
-        { path: './assets/json/7_paddling.json', skill: Constants.PADDLING },
-        { path: './assets/json/8_rowing.json', skill: Constants.ROWING },
-        { path: './assets/json/9_sailing.json', skill: Constants.SAILING },
-        { path: './assets/json/10_currentLevels.json', skill: Constants.CURRENTLEVELS }
-    ]
+    console.log("Set up file")
     const promises = []
     for (var file of skillJsonFiles) {
-        promises.push(saveQuestionIfNotThere(file.path, file.skill))
+        promises.push(saveJSONFile(file.path, file.skill))
     }
 
     return Promise.all(promises)
@@ -64,4 +76,4 @@ const retrieveCurrentLevel = async () => {
     return []
 }
 
-export { setUpInitalFiles, retrieveQuestions, retrieveCurrentLevel, saveQuestion }
+export { setUpInitalFiles, retrieveQuestions, retrieveCurrentLevel, saveQuestion, overwriteSpecificJsonFile }

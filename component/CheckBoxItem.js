@@ -25,13 +25,17 @@ export const CheckBoxItem = ({ cb, onChange, disabled }) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
+
         borderLeftWidth: 5,
         borderLeftColor: '#FF8846',
+
         borderWidth: 0.8,
-        borderRadius: 10,
-        borderRightColor: 'grey',
-        borderTopColor: 'grey',
-        borderBottomColor: 'grey',
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+        borderRightColor: '#C5C7C4',
+        borderTopColor: '#C5C7C4',
+        borderBottomColor: '#C5C7C4',
+
         backgroundColor: 'white',
 
         marginHorizontal: 20,
