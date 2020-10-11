@@ -7,7 +7,7 @@ import { Actions } from 'react-native-router-flux';
 
 export const SettingsScreen = () => {
     const [currentLevels, setCurrentLevels] = useState([]);
-
+    var [update, setUpdate] = useState(false)
     useEffect(() => {
         console.log("Restart")
         const setUp = async () => {
@@ -15,15 +15,14 @@ export const SettingsScreen = () => {
             setCurrentLevels(tempCurrentLevels);
         }
         setUp()
-    }, [])
+    }, [update])
 
     const resetSkill = async (skill) => {
-        console.log("Reset skill", skill)
         const tempCurrentLevels = currentLevels
         tempCurrentLevels[skill] = 0
         await saveQuestion(tempCurrentLevels, Constants.CURRENTLEVELS)
         await overwriteSpecificJsonFile(skill)
-        Actions.settings()
+        setUpdate(true)
     }
 
     return (

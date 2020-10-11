@@ -25,7 +25,7 @@ const App = () => {
       appReady && (
          <SafeAreaProvider>
             <Routes />
-            <StatusBar style="light" />
+            <StatusBar style='light' />
          </SafeAreaProvider>
       )
    )

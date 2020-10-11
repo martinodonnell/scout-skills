@@ -29,8 +29,6 @@ const saveJSONFile = async (questions, skill) => {
         var isDataSaved = await AsyncStorage.getItem('@' + skill)
         if (!isDataSaved) {
             await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
-        } else {
-            // console.log(skill + ' is already saved')
         }
     } catch (e) {
         console.log('Failed to save.' + skill + ':' + e)
@@ -47,7 +45,6 @@ const saveQuestion = async (questions, skill) => {
 }
 
 const setUpInitalFiles = () => {
-    console.log("Set up file")
     const promises = []
     for (var file of skillJsonFiles) {
         promises.push(saveJSONFile(file.path, file.skill))
