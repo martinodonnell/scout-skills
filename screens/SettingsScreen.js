@@ -3,7 +3,27 @@ import { View, Text, StyleSheet, ActivityIndicatorBase } from 'react-native';
 import { retrieveCurrentLevel, saveQuestion, overwriteSpecificJsonFile } from '../services/AsyncService';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Constants from '../component/Constants';
-import { Actions } from 'react-native-router-flux';
+
+const skillColour = [
+    { skill: Constants.CAMPING, bgColour: "#009F54" },
+    { skill: Constants.BACKWOODS, bgColour: "#559632" },
+    { skill: Constants.PIONEERING, bgColour: "#004E50" },
+    { skill: Constants.EMERGENCIES, bgColour: "#F57A41" },
+    { skill: Constants.HIKING, bgColour: "#F57921" },
+    { skill: Constants.AIR, bgColour: "#007CC2" },
+    { skill: Constants.PADDLING, bgColour: "#0668B3" },
+    { skill: Constants.ROWING, bgColour: "#0668B3" },
+    { skill: Constants.SAILING, bgColour: "#0060AA" },
+]
+
+const getSkillColour = (skill) => {
+    for (var x of skillColour) {
+        if (x.skill === skill) {
+            return x.bgColour
+        }
+    }
+    return 'blue'
+}
 
 export const SettingsScreen = () => {
     const [currentLevels, setCurrentLevels] = useState([]);
@@ -29,15 +49,17 @@ export const SettingsScreen = () => {
         <View style={styles.container}>
             {Object.entries(currentLevels).map(([skill, level]) => {
                 return (
-                    <View key={skill} style={styles.itemContainer}>
-                        <Text>Level {level + 1} {skill}</Text>
-                        <TouchableOpacity onPress={() => resetSkill(skill)} style={styles.buttonStyle}>
-                            <Text>Reset</Text>
-                        </TouchableOpacity>
+                    <View key={skill} style={[styles.itemContainer, { backgroundColor: getSkillColour(skill) }]}>
+                        <Text style={styles.textStyle}>Level {level + 1} {skill}</Text>
+                        <View >
+                            <TouchableOpacity onPress={() => resetSkill(skill)} style={styles.buttonStyle}>
+                                <Text style={styles.textStyle}>Reset</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 )
             })}
-        </View>
+        </View >
     )
 }
 
@@ -50,9 +72,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderWidth: 1,
         margin: 20,
-        padding: 10,
+        paddingHorizontal: 30,
+        paddingVertical: 10,
         alignItems: 'center',
-        justifyContent: 'space-around'
+        justifyContent: 'space-between',
+        borderRadius: 5
+    },
+    textStyle: {
+        color: 'white',
+        fontFamily: 'usuzi',
     },
     buttonStyle: {
         backgroundColor: "red",
@@ -60,6 +88,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 10,
         borderWidth: 2,
-        borderColor: 'black'
+        borderColor: 'black',
     }
 })
