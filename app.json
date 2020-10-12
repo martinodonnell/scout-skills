@@ -32,6 +32,11 @@
       "versionCode": 1,
       "icon": "./assets/imgs/all-skills.png",
       "googleServicesFile": "./google-services.json"
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#46BDFF",
+      "translucent": false,
+      "barStyle":"light-content"
     }
   }
 }

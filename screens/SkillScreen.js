@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Button, AsyncStorage, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, Button, AsyncStorage, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faForward, faBackward, faCheckCircle as fasCheckCircle } from '@fortawesome/free-solid-svg-icons'
@@ -17,9 +17,8 @@ export const SkillScreen = ({ skill }) => {
 
   useEffect(() => {
     const setUp = async () => {
-      setAppReady(false)
+      setAppReady(false)     
       await retrieveCurrentLevel()
-      console.log("---", skill)
       await retrieveQuestions()
       setAppReady(true)
     }
@@ -114,7 +113,7 @@ export const SkillScreen = ({ skill }) => {
   }
 
   if (questions.length == 0) {
-    return <Text>Loading</Text>
+    return null
   } else {
     return (
       appReady ? (
@@ -164,7 +163,6 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: RFPercentage(3.5),
     fontFamily: 'usuzi',
-
   },
   scroll: {
     flex: 15,
@@ -174,9 +172,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1.3,
     justifyContent: 'center',
+    alignItems:'center',
     backgroundColor: '#FF8846',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
+    paddingVertical: 10,
+    paddingBottom: Platform.OS === 'ios' ? 20 : 10
   },
   button: {
     flex: 1,

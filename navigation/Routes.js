@@ -1,12 +1,11 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Router, Scene } from 'react-native-router-flux'
+import { Router, Scene,Actions } from 'react-native-router-flux'
 import Home from '../screens/Home'
 import { SettingsScreen } from '../screens/SettingsScreen';
 import { SkillScreen } from '../screens/SkillScreen'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
-import { Actions } from 'react-native-router-flux';
 
 const SettingsButton = () => (
    <TouchableOpacity style={{ marginRight: 30 }} onPress={() => Actions.settings()}>
@@ -32,6 +31,7 @@ const Routes = () => (
             key="skillScreen"
             component={SkillScreen}
             title=""
+            backTitle = " "
          />
          <Scene
             key="settings"
