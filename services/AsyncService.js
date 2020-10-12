@@ -13,7 +13,7 @@ const skillJsonFiles = [
     { path: require('../assets/json/9_sailing.json'), skill: Constants.SAILING },
     { path: require('../assets/json/10_currentLevels.json'), skill: Constants.CURRENTLEVELS }
 ]
-
+ 
 const overwriteSpecificJsonFile = async (skill) => {
     for (var x of skillJsonFiles) {
         if (x.skill === skill) {
@@ -21,7 +21,6 @@ const overwriteSpecificJsonFile = async (skill) => {
         }
     }
     console.log("Error while saving new version of json file")
-
 }
 
 const saveJSONFile = async (questions, skill) => {

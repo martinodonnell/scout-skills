@@ -17,9 +17,10 @@ export const SkillScreen = ({ skill }) => {
 
   useEffect(() => {
     const setUp = async () => {
+      setAppReady(false)
       await retrieveCurrentLevel()
+      console.log("---", skill)
       await retrieveQuestions()
-
       setAppReady(true)
     }
     setUp()

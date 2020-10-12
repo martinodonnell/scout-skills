@@ -47,6 +47,10 @@ const styles = StyleSheet.create({
       backgroundColor: '#46BDFF',
       borderBottomStartRadius: 15,
       borderBottomEndRadius: 15
+      // borderBottomColor:'#46BDFF',
+      // elevation: 0,
+      // shadowOpacity: 0,
+      // borderBottomWidth: 0,
    },
    navTitle: {
       color: 'white',

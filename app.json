@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Adventure Skills",
-    "slug": "adventure-skills",
+    "name": "Scout Skills",
+    "slug": "scout-skills",
     "privacy": "public",
     "platforms": [
       "ios",
@@ -10,9 +10,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/imgs/all-skills.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/imgs/world-scout-logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -23,12 +23,15 @@
       "/assets/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.newryscouts.scoutskills",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "package": "com.newryscouts.scoutskills",
       "versionCode": 1,
-      "icon": "./assets/imgs/all-skills.png"
+      "icon": "./assets/imgs/all-skills.png",
+      "googleServicesFile": "./google-services.json"
     }
   }
 }

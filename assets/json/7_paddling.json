@@ -69,9 +69,7 @@
         {"id":704,"question":"My ability to assist in a H rescue, and in an assisted X rescue.","checked":false},
         ],
         [
-        {"id":701,"question":"The Scout must demonstrate correctly the following new skills","checked":false},
-        {"id":702,"question":"Forward ferry gliding, Reverse ferry gliding, Breaking in, Breaking out,","checked":false},
-        {"id":703,"question":"(A) Eskimo rescue (B) Eskimo roll.","checked":false},
+        {"id":701,"question":"The Scout must demonstrate correctly the following new skills, Forward ferry gliding, Reverse ferry gliding, Breaking in, Breaking out, (A) Eskimo rescue (B) Eskimo roll.","checked":false},
         {"id":704,"question":"I can demonstrate my understanding of the use of Defensive swimming.","checked":false},
         {"id":705,"question":"I can demonstrate my understanding of Eddies, Standing waves, V waves, Stoppers, and easy river routes i.e. the main flow down a Grade II rapid.","checked":false},
         {"id":706,"question":"I can demonstrate my understanding of good control (i.e. responding to various signals and commands).","checked":false},

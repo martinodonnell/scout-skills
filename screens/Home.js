@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, View,Platform } from "react-native";
 import * as Constants from "../component/Constants";
 import SkillSelectButton from "../component/SkillSelectButton";
 
@@ -28,5 +28,6 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     backgroundColor: "white",
+    paddingBottom: Platform.OS === 'ios' ? 20 : 10
   },
 });
