@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, ActivityIndicatorBase } from 'react-native';
 import { retrieveCurrentLevel, saveQuestion, overwriteSpecificJsonFile } from '../services/AsyncService';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Constants from '../component/Constants';
+import { RFPercentage } from 'react-native-responsive-fontsize';
+import { Actions } from 'react-native-router-flux';
 
 const skillColour = [
     { skill: Constants.CAMPING, bgColour: "#009F54" },
@@ -29,7 +31,6 @@ export const SettingsScreen = () => {
     const [currentLevels, setCurrentLevels] = useState([]);
     var [update, setUpdate] = useState(false)
     useEffect(() => {
-        console.log("Restart")
         const setUp = async () => {
             const tempCurrentLevels = await retrieveCurrentLevel()
             setCurrentLevels(tempCurrentLevels);
@@ -45,11 +46,15 @@ export const SettingsScreen = () => {
         setUpdate(true)
     }
 
+    const navigateAboutApp = () => {
+        Actions.aboutApp()
+    }
+
     return (
         <View style={styles.container}>
             {Object.entries(currentLevels).map(([skill, level]) => {
                 return (
-                    <View key={skill} style={[styles.itemContainer, { backgroundColor: getSkillColour(skill) }]}>
+                    <View key={skill} style={[styles.itemContainer,styles.borderStyle, { backgroundColor: getSkillColour(skill) }]}>
                         <Text style={styles.textStyle}>Level {level + 1} {skill}</Text>
                         <View >
                             <TouchableOpacity onPress={() => resetSkill(skill)} style={styles.buttonStyle}>
@@ -59,6 +64,9 @@ export const SettingsScreen = () => {
                     </View>
                 )
             })}
+             <TouchableOpacity style={[styles.borderStyle, styles.aboutUsButton]} onPress={() => navigateAboutApp()}>
+                <Text style={styles.aboutUsText}>About Us</Text>
+            </TouchableOpacity>
         </View >
     )
 }
@@ -70,17 +78,20 @@ const styles = StyleSheet.create({
     itemContainer: {
         flex: 1,
         flexDirection: 'row',
-        borderWidth: 1,
-        margin: 20,
-        paddingHorizontal: 30,
-        paddingVertical: 10,
         alignItems: 'center',
         justifyContent: 'space-between',
+    },
+    borderStyle: {
+        borderWidth: 1,
+        margin: 10,
+        paddingHorizontal: 30,
+        paddingVertical: 10,
         borderRadius: 5
     },
     textStyle: {
         color: 'white',
         fontFamily: 'usuzi',
+        fontSize:RFPercentage(2)
     },
     buttonStyle: {
         backgroundColor: "red",
@@ -89,5 +100,14 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 2,
         borderColor: 'black',
+    },
+    aboutUsButton: {
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    aboutUsText:{
+        color:'black',
+        fontFamily: 'usuzi',
+        fontSize:RFPercentage(2)
     }
 })

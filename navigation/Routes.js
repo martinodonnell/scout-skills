@@ -6,6 +6,8 @@ import { SettingsScreen } from '../screens/SettingsScreen';
 import { SkillScreen } from '../screens/SkillScreen'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
+import * as Constants from '../component/Constants';
+import AboutApp from '../screens/AboutApp';
 
 const SettingsButton = () => (
    <TouchableOpacity style={{ marginRight: 30 }} onPress={() => Actions.settings()}>
@@ -38,19 +40,20 @@ const Routes = () => (
             component={SettingsScreen}
             title="Settings"
          />
+          <Scene
+            key="aboutApp"
+            component={AboutApp}
+            title="About App"
+         />
       </Scene>
    </Router>
 )
 
 const styles = StyleSheet.create({
    navBar: {
-      backgroundColor: '#46BDFF',
+      backgroundColor: Constants.PRIMARY_COLOUR,
       borderBottomStartRadius: 15,
       borderBottomEndRadius: 15
-      // borderBottomColor:'#46BDFF',
-      // elevation: 0,
-      // shadowOpacity: 0,
-      // borderBottomWidth: 0,
    },
    navTitle: {
       color: 'white',
