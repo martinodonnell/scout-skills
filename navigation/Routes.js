@@ -43,7 +43,7 @@ const Routes = () => (
           <Scene
             key="aboutApp"
             component={AboutApp}
-            title="About App"
+            title="About Us"
          />
       </Scene>
    </Router>

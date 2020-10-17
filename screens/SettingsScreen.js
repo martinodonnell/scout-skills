@@ -73,7 +73,8 @@ export const SettingsScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingBottom: Platform.OS === 'ios' ? 20 : 10,
     },
     itemContainer: {
         flex: 1,
