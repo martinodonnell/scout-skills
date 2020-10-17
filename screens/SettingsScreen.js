@@ -72,7 +72,7 @@ export const SettingsScreen = () => {
                     <View key={skill} style={[styles.itemContainer,styles.borderStyle, { backgroundColor: getSkillColour(skill) }]}>
                         <Text style={styles.textStyle}> {stage + 1} {skill}</Text>
                         <TouchableOpacity onPress={() => createThreeButtonAlert(skill, stage)} style={styles.buttonStyle} disabled={stage==0}>
-                            <Text style={styles.textStyle}>Reset</Text>
+                            <Text style={[styles.textStyle, stage==0 && {opacity:0.5}]}>Reset</Text>
                         </TouchableOpacity>
                     </View>
                 )
@@ -104,9 +104,9 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     textStyle: {
-        color: 'white',
         fontFamily: 'usuzi',
-        fontSize:RFPercentage(2)
+        fontSize:RFPercentage(2),
+        color: 'white'
     },
     buttonStyle: {
         backgroundColor: "red",
