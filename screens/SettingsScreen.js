@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicatorBase } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import { retrieveCurrentStage, saveQuestion, overwriteSpecificJsonFile } from '../services/AsyncService';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Constants from '../component/Constants';
@@ -37,6 +37,18 @@ export const SettingsScreen = () => {
         }
         setUp()
     }, [update])
+    
+    const createThreeButtonAlert = (skill, stage) => (
+        Alert.alert(
+        `Resetting ${skill} back to 1`,
+        `Are you sure you want reset stage ${stage+1} of ${skill} back to 1?`,
+        [
+            { text: "No" },
+            { text: "OK", onPress: () => resetSkill(skill) }
+        ],
+        { cancelable: true }
+        )
+    )
 
     const resetSkill = async (skill) => {
         const tempCurrentStages = currentStages
@@ -50,20 +62,22 @@ export const SettingsScreen = () => {
         Actions.aboutApp()
     }
 
+    if(currentStages.length==0){
+        return null
+    }
     return (
-        <View style={styles.container}>
+        <View style={styles.container}>            
             {Object.entries(currentStages).map(([skill, stage]) => {
                 return (
                     <View key={skill} style={[styles.itemContainer,styles.borderStyle, { backgroundColor: getSkillColour(skill) }]}>
                         <Text style={styles.textStyle}> {stage + 1} {skill}</Text>
-                        <View >
-                            <TouchableOpacity onPress={() => resetSkill(skill)} style={styles.buttonStyle}>
-                                <Text style={styles.textStyle}>Reset</Text>
-                            </TouchableOpacity>
-                        </View>
+                        <TouchableOpacity onPress={() => createThreeButtonAlert(skill, stage)} style={styles.buttonStyle} disabled={stage==0}>
+                            <Text style={styles.textStyle}>Reset</Text>
+                        </TouchableOpacity>
                     </View>
                 )
             })}
+
              <TouchableOpacity style={[styles.borderStyle, styles.aboutUsButton]} onPress={() => navigateAboutApp()}>
                 <Text style={styles.aboutUsText}>About Us</Text>
             </TouchableOpacity>
@@ -96,7 +110,7 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         backgroundColor: "red",
-        paddingVertical: 5,
+        padding: 1,
         paddingHorizontal: 20,
         borderRadius: 10,
         borderWidth: 2,

@@ -1,35 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View,Platform,Image,Linking } from "react-native";
-import { AntDesign } from '@expo/vector-icons';
-import { Foundation } from '@expo/vector-icons'; 
 import { RFPercentage } from "react-native-responsive-fontsize";
 import Constants from 'expo-constants';
 import * as Constant from '../component/Constants';
-import * as MailComposer from 'expo-mail-composer';
-
-
-const openURL = (mobilieURL, websiteURL) => {
-  Linking.canOpenURL(mobilieURL).then(supported => {
-    console.log(supported)
-    if (supported) {
-      Linking.openURL(mobilieURL)
-    } else {
-      Linking.openURL(websiteURL)
-    }
-  })
-}
-
-const AntIconLink = ({name,iconSize,color, mobileURL, websiteURL}) => (
-  <TouchableOpacity onPress={() => openURL(mobileURL, websiteURL)}>
-    <AntDesign name={name} size={iconSize} color={color} />
-  </TouchableOpacity>
-)
+import { AntIconLink } from '../component/AntIconLink';
 
 const AboutApp = () => {
   const iconSize = RFPercentage(6)
-  const options = {
-    recipients: ['website@newryscouts.com'],
-  }
   
   return (
     <View style={styles.container}>
@@ -38,7 +15,7 @@ const AboutApp = () => {
         <Image source={require('../assets/imgs/newry-scouts-logo.jpg')} resizeMode='contain' style={styles.imageStyle} />
       </View>
 
-      <Text style={{paddingHorizontal:RFPercentage(2)}}>
+      <Text style={styles.descriptionStyle}>
         Scouting is a Movement of Young People, which helps to achieve their full potential through a programme based on fun, friendship, challenge and adventure.
         Young People in Scouting are supported, encouraged and led by adult volunteers, all of whom understand the responsibility and trust placed in them by parents and guardians.
         The encouragement of self-awareness in its members, as individuals and as members of Groups, is fundamental to Scouting. A natural result of this should be that an environment is created where all our members (regardless of age, gender, sexuality, race, ethnicity, religion, political persuasion or ability) feel comfortable to be themselves, to do their best, to achieve their full potential and, as responsible citizens, to improve society.      
@@ -86,6 +63,10 @@ const styles = StyleSheet.create({
   centerContainer:{
     justifyContent:'space-around',
     alignItems:'center'
+  },
+  descriptionStyle:{
+    paddingHorizontal:RFPercentage(2),
+    fontSize:RFPercentage(1.6)
   },
   socialStyles: {
     flexDirection:'row', 
