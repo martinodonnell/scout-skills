@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicatorBase } from 'react-native';
-import { retrieveCurrentLevel, saveQuestion, overwriteSpecificJsonFile } from '../services/AsyncService';
+import { retrieveCurrentStage, saveQuestion, overwriteSpecificJsonFile } from '../services/AsyncService';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Constants from '../component/Constants';
 import { RFPercentage } from 'react-native-responsive-fontsize';
@@ -28,20 +28,20 @@ const getSkillColour = (skill) => {
 }
 
 export const SettingsScreen = () => {
-    const [currentLevels, setCurrentLevels] = useState([]);
+    const [currentStages, setCurrentStages] = useState([]);
     var [update, setUpdate] = useState(false)
     useEffect(() => {
         const setUp = async () => {
-            const tempCurrentLevels = await retrieveCurrentLevel()
-            setCurrentLevels(tempCurrentLevels);
+            const tempCurrentStages = await retrieveCurrentStage()
+            setCurrentStages(tempCurrentStages);
         }
         setUp()
     }, [update])
 
     const resetSkill = async (skill) => {
-        const tempCurrentLevels = currentLevels
-        tempCurrentLevels[skill] = 0
-        await saveQuestion(tempCurrentLevels, Constants.CURRENTLEVELS)
+        const tempCurrentStages = currentStages
+        tempCurrentStages[skill] = 0
+        await saveQuestion(tempCurrentStages, Constants.CURRENTSTAGES)
         await overwriteSpecificJsonFile(skill)
         setUpdate(true)
     }
@@ -52,10 +52,10 @@ export const SettingsScreen = () => {
 
     return (
         <View style={styles.container}>
-            {Object.entries(currentLevels).map(([skill, level]) => {
+            {Object.entries(currentStages).map(([skill, stage]) => {
                 return (
                     <View key={skill} style={[styles.itemContainer,styles.borderStyle, { backgroundColor: getSkillColour(skill) }]}>
-                        <Text style={styles.textStyle}>Level {level + 1} {skill}</Text>
+                        <Text style={styles.textStyle}> {stage + 1} {skill}</Text>
                         <View >
                             <TouchableOpacity onPress={() => resetSkill(skill)} style={styles.buttonStyle}>
                                 <Text style={styles.textStyle}>Reset</Text>

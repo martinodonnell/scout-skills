@@ -11,14 +11,14 @@ import { saveQuestion } from '../services/AsyncService';
 
 export const SkillScreen = ({ skill }) => {
   const [questions, setQuestions] = useState([])
-  const [currentLevels, setCurrentLevels] = useState([])
-  const [level, setLevel] = useState(0)
+  const [currentStages, setCurrentStages] = useState([])
+  const [stage, setStage] = useState(0)
   const [appReady, setAppReady] = useState(false)
 
   useEffect(() => {
     const setUp = async () => {
       setAppReady(false)     
-      await retrieveCurrentLevel()
+      await retrieveCurrentStage()
       await retrieveQuestions()
       setAppReady(true)
     }
@@ -37,79 +37,79 @@ export const SkillScreen = ({ skill }) => {
     }
   }
 
-  const retrieveCurrentLevel = async () => {
+  const retrieveCurrentStage = async () => {
     try {
-      const output = await AsyncStorage.getItem('@' + Constants.CURRENTLEVELS);
+      const output = await AsyncStorage.getItem('@' + Constants.CURRENTSTAGES);
       if (output !== null) {
         const jsonOutput = JSON.parse(output)
-        await setCurrentLevels(jsonOutput)
-        await setLevel(parseInt(jsonOutput[skill]))
+        await setCurrentStages(jsonOutput)
+        await setStage(parseInt(jsonOutput[skill]))
         setHeaderTitle(jsonOutput[skill])
 
       } else {
-        alert(Constants.CURRENTLEVELS + " data not recieved");
+        alert(Constants.CURRENTSTAGES + " data not recieved");
       }
     } catch (e) {
-      console.log('Failed to retrieve ' + Constants.CURRENTLEVELS + 'data.' + e)
+      console.log('Failed to retrieve ' + Constants.CURRENTSTAGES + 'data.' + e)
     }
   }
 
-  const completeLevel = () => {
-    const currentLevel = currentLevels[skill]
-    const displayLevel = level + 1
-    if (currentLevel == level) {
-      let levelQuestions = questions.questions[level];
-      for (var i = 0; i < levelQuestions.length; i++) {
-        if (levelQuestions[i].checked == false) {
-          alert("Not all sections are completed in level " + displayLevel);
+  const completeStage = () => {
+    const currentStage = currentStages[skill]
+    const displayStage = stage + 1
+    if (currentStage == stage) {
+      let stageQuestions = questions.questions[stage];
+      for (var i = 0; i < stageQuestions.length; i++) {
+        if (stageQuestions[i].checked == false) {
+          alert("Not all sections are completed in stage " + displayStage);
           return false;
         }
       }
 
-      //check we have not hit last level
-      var nextLevel = currentLevel + 1
-      if (nextLevel != 10) {
-        //update current level value in storage
-        updateCurrentLevel()
-        refreshScreen(nextLevel)
+      //check we have not hit last stage
+      var nextStage = currentStage + 1
+      if (nextStage != 10) {
+        //update current stage value in storage
+        updateCurrentStage()
+        refreshScreen(nextStage)
       } else {
-        alert("You have completed every level for " + skill + ", go have a party!!!. ")
+        alert("You have completed every stage for " + skill + ", go have a party!!!. ")
       }
       return true;
-    } else if (level > currentLevel) {
-      alert("The previous levels need to be completed before ticking off level " + displayLevel)
+    } else if (stage > currentStage) {
+      alert("The previous stages need to be completed before ticking off stage " + displayStage)
     } else {
-      alert("You have already completed this level")
+      alert("You have already completed this stage")
     }
     return false
   }
 
-  const updateCurrentLevel = () => {
-    currentLevels[skill] += 1
-    setCurrentLevels(currentLevels)
-    saveQuestion(currentLevels, Constants.CURRENTLEVELS)
+  const updateCurrentStage = () => {
+    currentStages[skill] += 1
+    setCurrentStages(currentStages)
+    saveQuestion(currentStages, Constants.CURRENTSTAGES)
   }
 
-  const setHeaderTitle = (newLevel) => {
-    const title = `${skill} Level ${newLevel + 1}`
+  const setHeaderTitle = (newStage) => {
+    const title = `${skill} stage ${newStage + 1}`
     Actions.refresh({ title: title })
   }
 
-  const lowerLevel = () => {
-    if (level > 0) {
-      refreshScreen(level - 1)
+  const lowerStage = () => {
+    if (stage > 0) {
+      refreshScreen(stage - 1)
     }
   }
 
-  const higherLevel = () => {
-    if (level < 8) {
-      refreshScreen(level + 1)
+  const higherStage = () => {
+    if (stage < 8) {
+      refreshScreen(stage + 1)
     }
   }
 
-  const refreshScreen = (newLevel) => {
-    setLevel(newLevel)
-    setHeaderTitle(newLevel)
+  const refreshScreen = (newStage) => {
+    setStage(newStage)
+    setHeaderTitle(newStage)
   }
 
   if (questions.length == 0) {
@@ -120,27 +120,27 @@ export const SkillScreen = ({ skill }) => {
         <View style={styles.container}>
           <View style={styles.scroll}>
             <ScrollView style={{ borderRadius: 0 }}>
-              <ListQuestions questions={questions} skill={skill} level={level} currentLevel={currentLevels[skill]} />
+              <ListQuestions questions={questions} skill={skill} stage={stage} currentStage={currentStages[skill]} />
             </ScrollView>
           </View>
 
           <View style={styles.nav}>
-            <TouchableOpacity style={styles.button} onPress={() => lowerLevel()}>
+            <TouchableOpacity style={styles.button} onPress={() => lowerStage()}>
               <FontAwesomeIcon
                 icon={faBackward}
                 size={25}
                 color='white'
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => completeLevel()}>
+            <TouchableOpacity style={styles.button} onPress={() => completeStage()}>
               <FontAwesomeIcon
-                icon={level >= currentLevels[skill] ? farCheckCircle : fasCheckCircle}
+                icon={stage >= currentStages[skill] ? farCheckCircle : fasCheckCircle}
                 size={45}
                 mask={'fas'}
                 color='white'
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => higherLevel()}>
+            <TouchableOpacity style={styles.button} onPress={() => higherStage()}>
               <FontAwesomeIcon
                 icon={faForward}
                 size={25}

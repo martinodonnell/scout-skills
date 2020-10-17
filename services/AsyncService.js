@@ -11,7 +11,7 @@ const skillJsonFiles = [
     { path: require('../assets/json/7_paddling.json'), skill: Constants.PADDLING },
     { path: require('../assets/json/8_rowing.json'), skill: Constants.ROWING },
     { path: require('../assets/json/9_sailing.json'), skill: Constants.SAILING },
-    { path: require('../assets/json/10_currentLevels.json'), skill: Constants.CURRENTLEVELS }
+    { path: require('../assets/json/10_currentStages.json'), skill: Constants.CURRENTSTAGES }
 ]
  
 const overwriteSpecificJsonFile = async (skill) => {
@@ -62,14 +62,14 @@ const retrieveQuestions = async () => {
     return []
 }
 
-const retrieveCurrentLevel = async () => {
+const retrieveCurrentStage = async () => {
     try {
-        const output = await AsyncStorage.getItem('@' + Constants.CURRENTLEVELS);
+        const output = await AsyncStorage.getItem('@' + Constants.CURRENTSTAGES);
         return JSON.parse(output)
     } catch (e) {
-        console.log('Failed to retrieve ' + Constants.CURRENTLEVELS + 'data.' + e)
+        console.log('Failed to retrieve ' + Constants.CURRENTSTAGES + 'data.' + e)
     }
     return []
 }
 
-export { setUpInitalFiles, retrieveQuestions, retrieveCurrentLevel, saveQuestion, overwriteSpecificJsonFile }
+export { setUpInitalFiles, retrieveQuestions, retrieveCurrentStage, saveQuestion, overwriteSpecificJsonFile }

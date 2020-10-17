@@ -7,15 +7,21 @@ import Constants from 'expo-constants';
 import * as Constant from '../component/Constants';
 import * as MailComposer from 'expo-mail-composer';
 
-const AntIconLink = ({name,iconSize,color, url}) => (
-  <TouchableOpacity onPress={() => Linking.openURL(url)}>
-    <AntDesign name={name} size={iconSize} color={color} />
-  </TouchableOpacity>
-)
 
-const FoundationIconLink = ({name,iconSize,color, url}) => (
-  <TouchableOpacity onPress={() => Linking.openURL(url)}>
-    <Foundation name={name} size={iconSize} color={color} />
+const openURL = (mobilieURL, websiteURL) => {
+  Linking.canOpenURL(mobilieURL).then(supported => {
+    console.log(supported)
+    if (supported) {
+      Linking.openURL(mobilieURL)
+    } else {
+      Linking.openURL(websiteURL)
+    }
+  })
+}
+
+const AntIconLink = ({name,iconSize,color, mobileURL, websiteURL}) => (
+  <TouchableOpacity onPress={() => openURL(mobileURL, websiteURL)}>
+    <AntDesign name={name} size={iconSize} color={color} />
   </TouchableOpacity>
 )
 
@@ -33,14 +39,17 @@ const AboutApp = () => {
       </View>
 
       <Text style={{paddingHorizontal:RFPercentage(2)}}>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        Scouting is a Movement of Young People, which helps to achieve their full potential through a programme based on fun, friendship, challenge and adventure.
+        Young People in Scouting are supported, encouraged and led by adult volunteers, all of whom understand the responsibility and trust placed in them by parents and guardians.
+        The encouragement of self-awareness in its members, as individuals and as members of Groups, is fundamental to Scouting. A natural result of this should be that an environment is created where all our members (regardless of age, gender, sexuality, race, ethnicity, religion, political persuasion or ability) feel comfortable to be themselves, to do their best, to achieve their full potential and, as responsible citizens, to improve society.      
       </Text>
+      
 
       <View style={[styles.socialStyles,styles.centerContainer]}>
-        <AntIconLink name='facebook-square' iconSize={iconSize} color="#4267B2" url={'https://www.facebook.com/NewryScouts'}/>
-        <AntIconLink name='twitter' iconSize={iconSize} color="#1DA1F2" url={'https://twitter.com/newryscouts?lang=en'}/>
-        <AntIconLink name='youtube' iconSize={iconSize} color="#FF0000" url={'https://www.youtube.com/channel/UC0KFsxYhBADWQ0D5I8jeCLw'}/>
-        <FoundationIconLink name="web" iconSize={iconSize} color="grey" url={'https://newryscouts.com/'}/>
+        <AntIconLink name='facebook-square' iconSize={iconSize} color="#4267B2" mobileURL={'fb://page/127280414090853'} websiteURL={'https://www.facebook.com/NewryScouts/'}/>
+        <AntIconLink name='twitter' iconSize={iconSize} color="#1DA1F2" mobileURL={'twitter://user?screen_name=newryscouts?lang=en'} websiteURL={'https://twitter.com/newryscouts?lang=en'}/>
+        <AntIconLink name='youtube' iconSize={iconSize} color="#FF0000" mobileURL={'http://www.youtube.com/c/NewryScouts'} websiteURL={'http://www.youtube.com/c/NewryScouts'}/>
+        <AntIconLink name="instagram" iconSize={iconSize} color="black" mobileURL={'https://www.instagram.com/newryscouts/'} websiteURL={'https://www.instagram.com/newryscouts/'}/>
       </View>
 
       <View style={styles.centerContainer}>
@@ -48,7 +57,7 @@ const AboutApp = () => {
           <Text style={styles.buttonTextStyle}>Donate</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.buttonStyle, styles.centerContainer]} onPress={() => MailComposer.composeAsync(options)}>
+        <TouchableOpacity style={[styles.buttonStyle, styles.centerContainer]} onPress={() => Linking.openURL('https://newryscouts.com/contact.html')}>
           <Text style={styles.buttonTextStyle}>Contact us</Text>
         </TouchableOpacity>
       </View>
