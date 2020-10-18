@@ -11,20 +11,19 @@ const AboutApp = () => {
   return (
     <View style={styles.container}>
 
-      <View style={styles.centerContainer}>
+      <TouchableOpacity style={styles.centerContainer} onPress={() => Linking.openURL('https://newryscouts.com/')}>
         <Image source={require('../assets/imgs/newry-scouts-logo.jpg')} resizeMode='contain' style={styles.imageStyle} />
-      </View>
+      </TouchableOpacity>
 
       <Text style={styles.descriptionStyle}>
         Scouting is a Movement of Young People, which helps to achieve their full potential through a programme based on fun, friendship, challenge and adventure.
         Young People in Scouting are supported, encouraged and led by adult volunteers, all of whom understand the responsibility and trust placed in them by parents and guardians.
         The encouragement of self-awareness in its members, as individuals and as members of Groups, is fundamental to Scouting. A natural result of this should be that an environment is created where all our members (regardless of age, gender, sexuality, race, ethnicity, religion, political persuasion or ability) feel comfortable to be themselves, to do their best, to achieve their full potential and, as responsible citizens, to improve society.      
-      </Text>
-      
+      </Text>      
 
       <View style={[styles.socialStyles,styles.centerContainer]}>
         <AntIconLink name='facebook-square' iconSize={iconSize} color="#4267B2" mobileURL={'fb://page/127280414090853'} websiteURL={'https://www.facebook.com/NewryScouts/'}/>
-        <AntIconLink name='twitter' iconSize={iconSize} color="#1DA1F2" mobileURL={'twitter://user?screen_name=newryscouts?lang=en'} websiteURL={'https://twitter.com/newryscouts?lang=en'}/>
+        <AntIconLink name='twitter' iconSize={iconSize} color="#1DA1F2" mobileURL={'twitter://user?screen_name=newryscouts'} websiteURL={'https://twitter.com/newryscouts?lang=en'}/>
         <AntIconLink name='youtube' iconSize={iconSize} color="#FF0000" mobileURL={'http://www.youtube.com/c/NewryScouts'} websiteURL={'http://www.youtube.com/c/NewryScouts'}/>
         <AntIconLink name="instagram" iconSize={iconSize} color="black" mobileURL={'https://www.instagram.com/newryscouts/'} websiteURL={'https://www.instagram.com/newryscouts/'}/>
       </View>

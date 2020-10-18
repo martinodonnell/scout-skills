@@ -27,7 +27,7 @@ const saveJSONFile = async (questions, skill) => {
     try {
         var isDataSaved = await AsyncStorage.getItem('@' + skill)
         if (!isDataSaved) {
-            await AsyncStorage.setItem('@' + skill, JSON.stringify(questions))
+            saveQuestion(questions,skill)
         }
     } catch (e) {
         console.log('Failed to save.' + skill + ':' + e)
