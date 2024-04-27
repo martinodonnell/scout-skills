@@ -2,17 +2,8 @@ import React, { Component, useEffect, useState } from "react";
 import { StyleSheet, TouchableOpacity, Text, View,Platform } from "react-native";
 import * as Constants from "../component/Constants";
 import SkillSelectButton from "../component/SkillSelectButton";
-import { useFonts } from 'expo-font';
 
 export default function Home() {
-  const [fontsLoaded] = useFonts({
-    'usuzi': require('../assets/fonts/usuzi.ttf'),
-  });
-
-  if(!fontsLoaded) {
-    return null
-  }
-
   return (
     <View style={styles.container}>
       <SkillSelectButton skill={Constants.CAMPING} textColor="#009F54" />
