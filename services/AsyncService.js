@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Constants from '../component/Constants';
 
 const skillJsonFiles = [
@@ -13,7 +13,7 @@ const skillJsonFiles = [
     { path: require('../assets/json/9_sailing.json'), skill: Constants.SAILING },
     { path: require('../assets/json/10_currentStages.json'), skill: Constants.CURRENTSTAGES }
 ]
- 
+
 const overwriteSpecificJsonFile = async (skill) => {
     for (var x of skillJsonFiles) {
         if (x.skill === skill) {

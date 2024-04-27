@@ -1,5 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
-import { AppRegistry, View, AsyncStorage, Text } from 'react-native';
+import React, {  useEffect, useState } from 'react';
 import Routes from './navigation/Routes';
 import * as Font from 'expo-font';
 import { setUpInitalFiles } from './services/AsyncService';

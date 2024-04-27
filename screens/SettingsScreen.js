@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, Platform, TouchableOpacity } from 'react-native';
 import { retrieveCurrentStage, saveQuestion, overwriteSpecificJsonFile } from '../services/AsyncService';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Constants from '../component/Constants';
 import { RFPercentage } from 'react-native-responsive-fontsize';
-import { Actions } from 'react-native-router-flux';
+// import { Actions } from 'react-native-router-flux';
 
 const skillColour = [
     { skill: Constants.CAMPING, bgColour: "#009F54" },
@@ -33,11 +32,12 @@ export const SettingsScreen = () => {
     useEffect(() => {
         const setUp = async () => {
             const tempCurrentStages = await retrieveCurrentStage()
+            console.log("tempCurrentStages", tempCurrentStages)
             setCurrentStages(tempCurrentStages);
         }
         setUp()
     }, [update])
-    
+
     const createThreeButtonAlert = (skill, stage) => (
         Alert.alert(
         `Resetting ${skill} back to 1`,
@@ -62,11 +62,11 @@ export const SettingsScreen = () => {
         Actions.aboutApp()
     }
 
-    if(currentStages.length==0){
+    if(currentStages.length===0){
         return null
     }
     return (
-        <View style={styles.container}>            
+        <View style={styles.container}>
             {Object.entries(currentStages).map(([skill, stage]) => {
                 return (
                     <View key={skill} style={[styles.itemContainer,styles.borderStyle, { backgroundColor: getSkillColour(skill) }]}>
@@ -77,7 +77,6 @@ export const SettingsScreen = () => {
                     </View>
                 )
             })}
-
              <TouchableOpacity style={[styles.borderStyle, styles.aboutUsButton]} onPress={() => navigateAboutApp()}>
                 <Text style={styles.aboutUsText}>About Us</Text>
             </TouchableOpacity>

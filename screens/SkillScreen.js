@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Button, AsyncStorage, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { StyleSheet, View, Button, Text, TouchableOpacity, ScrollView, Image, Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+// import { Actions } from 'react-native-router-flux';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faForward, faBackward, faCheckCircle as fasCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
@@ -17,7 +18,7 @@ export const SkillScreen = ({ skill }) => {
 
   useEffect(() => {
     const setUp = async () => {
-      setAppReady(false)     
+      setAppReady(false)
       await retrieveCurrentStage()
       await retrieveQuestions()
       setAppReady(true)
@@ -92,7 +93,7 @@ export const SkillScreen = ({ skill }) => {
 
   const setHeaderTitle = (newStage) => {
     const title = `${skill} stage ${newStage + 1}`
-    Actions.refresh({ title: title })
+    // Actions.refresh({ title: title })
   }
 
   const lowerStage = () => {

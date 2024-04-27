@@ -7,7 +7,7 @@ import { AntIconLink } from '../component/AntIconLink';
 
 const AboutApp = () => {
   const iconSize = RFPercentage(6)
-  
+
   return (
     <View style={styles.container}>
 
@@ -18,8 +18,8 @@ const AboutApp = () => {
       <Text style={styles.descriptionStyle}>
         Scouting is a Movement of Young People, which helps to achieve their full potential through a programme based on fun, friendship, challenge and adventure.
         Young People in Scouting are supported, encouraged and led by adult volunteers, all of whom understand the responsibility and trust placed in them by parents and guardians.
-        The encouragement of self-awareness in its members, as individuals and as members of Groups, is fundamental to Scouting. A natural result of this should be that an environment is created where all our members (regardless of age, gender, sexuality, race, ethnicity, religion, political persuasion or ability) feel comfortable to be themselves, to do their best, to achieve their full potential and, as responsible citizens, to improve society.      
-      </Text>      
+        The encouragement of self-awareness in its members, as individuals and as members of Groups, is fundamental to Scouting. A natural result of this should be that an environment is created where all our members (regardless of age, gender, sexuality, race, ethnicity, religion, political persuasion or ability) feel comfortable to be themselves, to do their best, to achieve their full potential and, as responsible citizens, to improve society.
+      </Text>
 
       <View style={[styles.socialStyles,styles.centerContainer]}>
         <AntIconLink name='facebook-square' iconSize={iconSize} color="#4267B2" mobileURL={'fb://page/127280414090853'} websiteURL={'https://www.facebook.com/NewryScouts/'}/>
@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
     paddingBottom: Platform.OS === 'ios' ? 20 : 10,
     flexGrow:1,
   },
-  imageStyle:{ 
+  imageStyle:{
     width: RFPercentage(40),
-    height: RFPercentage(25) 
+    height: RFPercentage(25)
   },
   centerContainer:{
     justifyContent:'space-around',
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     fontSize:RFPercentage(1.6)
   },
   socialStyles: {
-    flexDirection:'row', 
+    flexDirection:'row',
     marginVertical:RFPercentage(5)
   },
   buttonStyle:{
