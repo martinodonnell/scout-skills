@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Button, Text, TouchableOpacity, ScrollView, Image, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { Actions } from 'react-native-router-flux';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faForward, faBackward, faCheckCircle as fasCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 import { RFPercentage } from "react-native-responsive-fontsize";
-import { ListQuestions } from '../component/ListQuestions';
-import * as Constants from '../component/Constants'
-import { saveQuestion } from '../services/AsyncService';
+import { ListQuestions } from '../../component/ListQuestions';
+import * as Constants from '../../component/Constants'
+import { saveQuestion } from '../../services/AsyncService';
+import { useLocalSearchParams } from 'expo-router';
 
-export const SkillScreen = ({ skill }) => {
+export default function Skill() {
+  const { skill } = useLocalSearchParams();
+
   const [questions, setQuestions] = useState([])
   const [currentStages, setCurrentStages] = useState([])
   const [stage, setStage] = useState(0)

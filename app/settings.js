@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Alert, Platform, TouchableOpacity } from 'react
 import { retrieveCurrentStage, saveQuestion, overwriteSpecificJsonFile } from '../services/AsyncService';
 import * as Constants from '../component/Constants';
 import { RFPercentage } from 'react-native-responsive-fontsize';
-// import { Actions } from 'react-native-router-flux';
 
 const skillColour = [
     { skill: Constants.CAMPING, bgColour: "#009F54" },
@@ -26,7 +25,7 @@ const getSkillColour = (skill) => {
     return 'blue'
 }
 
-export const SettingsScreen = () => {
+export default function Settings() {
     const [currentStages, setCurrentStages] = useState([]);
     var [update, setUpdate] = useState(false)
     useEffect(() => {
