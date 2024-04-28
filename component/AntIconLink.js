@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Linking } from "react-native";
-// import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 const openURL = (mobilieURL, websiteURL) => {
     Linking.canOpenURL(mobilieURL).then(supported => {
@@ -14,7 +14,7 @@ const openURL = (mobilieURL, websiteURL) => {
 
 const AntIconLink = ({name,iconSize,color, mobileURL, websiteURL}) => (
     <TouchableOpacity onPress={() => openURL(mobileURL, websiteURL)}>
-        {/* <AntDesign name={name} size={iconSize} color={color} /> */}
+        <AntDesign name={name} size={iconSize} color={color} />
     </TouchableOpacity>
 )
 
