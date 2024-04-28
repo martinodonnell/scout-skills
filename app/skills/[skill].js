@@ -9,6 +9,7 @@ import { ListQuestions } from '../../component/ListQuestions';
 import * as Constants from '../../component/Constants'
 import { saveQuestion } from '../../services/AsyncService';
 import { useLocalSearchParams } from 'expo-router';
+import { Stack } from 'expo-router';
 
 export default function Skill() {
   const { skill } = useLocalSearchParams();
@@ -121,6 +122,15 @@ export default function Skill() {
     return (
       appReady ? (
         <View style={styles.container}>
+          <Stack.Screen
+            options={{
+              title: skill,
+              headerBackTitleVisible: false,
+              headerStyle: {
+                backgroundColor: Constants.SECOND_COLOUR
+              },
+            }}
+          />
           <View style={styles.scroll}>
             <ScrollView style={{ borderRadius: 0 }}>
               <ListQuestions questions={questions} skill={skill} stage={stage} currentStage={currentStages[skill]} />

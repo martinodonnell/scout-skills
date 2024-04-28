@@ -4,12 +4,19 @@ import { RFPercentage } from "react-native-responsive-fontsize";
 import Constants from 'expo-constants';
 import * as Constant from '../component/Constants';
 import { AntIconLink } from '../component/AntIconLink';
+import { Stack } from 'expo-router';
 
 const AboutApp = () => {
   const iconSize = RFPercentage(6)
 
   return (
     <View style={styles.container}>
+      <Stack.Screen
+          options={{
+              title: 'About',
+              headerBackTitleVisible: false,
+          }}
+      />
 
       <TouchableOpacity style={styles.centerContainer} onPress={() => Linking.openURL('https://newryscouts.com/')}>
         <Image source={require('../assets/imgs/newry-scouts-logo.jpg')} resizeMode='contain' style={styles.imageStyle} />
