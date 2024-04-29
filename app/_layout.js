@@ -29,11 +29,12 @@ export default function HomeLayout() {
       <Stack
         screenOptions={{
           headerStyle: {
-            backgroundColor: Constants.PRIMARY_COLOUR
+            backgroundColor: Constants.PRIMARY_COLOUR,
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
             fontWeight: 'bold',
+            fontFamily: 'usuzi',
           },
         }}
       />

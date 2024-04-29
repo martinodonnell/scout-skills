@@ -1,5 +1,5 @@
-import React, { Component, useEffect, useState } from "react";
-import { StyleSheet, TouchableOpacity, Image, View, Platform, Button } from "react-native";
+import React from "react";
+import { StyleSheet, View, Platform } from "react-native";
 import * as Constants from "../component/Constants";
 import SkillSelectButton from "../component/SkillSelectButton";
 import { Stack, Link } from 'expo-router'
