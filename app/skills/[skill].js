@@ -1,15 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Button, AsyncStorage, Text, TouchableOpacity, ScrollView, Image, ActivityIndicator } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { StyleSheet, View, TouchableOpacity, ScrollView, Image, Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faForward, faBackward, faCheckCircle as fasCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { faCheckCircle as farCheckCircle } from '@fortawesome/free-regular-svg-icons'
 import { RFPercentage } from "react-native-responsive-fontsize";
-import { ListQuestions } from '../component/ListQuestions';
-import * as Constants from '../component/Constants'
-import { saveQuestion } from '../services/AsyncService';
+import { ListQuestions } from '../../component/ListQuestions';
+import * as Constants from '../../component/Constants'
+import { saveQuestion } from '../../services/AsyncService';
+import { useLocalSearchParams } from 'expo-router';
+import { Stack } from 'expo-router';
 
-export const SkillScreen = ({ skill }) => {
+function SkillScreen({ skill }) {
+  return <Stack.Screen
+    options={{
+      title: skill,
+      headerBackTitleVisible: false,
+      headerStyle: {
+        backgroundColor: Constants.SECOND_COLOUR
+      },
+    }}
+  />
+}
+export default function Skill() {
+  const { skill } = useLocalSearchParams();
+
   const [questions, setQuestions] = useState([])
   const [currentStages, setCurrentStages] = useState([])
   const [stage, setStage] = useState(0)
@@ -17,7 +32,7 @@ export const SkillScreen = ({ skill }) => {
 
   useEffect(() => {
     const setUp = async () => {
-      setAppReady(false)     
+      setAppReady(false)
       await retrieveCurrentStage()
       await retrieveQuestions()
       setAppReady(true)
@@ -92,7 +107,7 @@ export const SkillScreen = ({ skill }) => {
 
   const setHeaderTitle = (newStage) => {
     const title = `${skill} stage ${newStage + 1}`
-    Actions.refresh({ title: title })
+    // Actions.refresh({ title: title })
   }
 
   const lowerStage = () => {
@@ -113,11 +128,12 @@ export const SkillScreen = ({ skill }) => {
   }
 
   if (questions.length == 0) {
-    return null
+    return <SkillScreen skill={skill}/>
   } else {
     return (
       appReady ? (
         <View style={styles.container}>
+          <SkillScreen skill={skill}/>
           <View style={styles.scroll}>
             <ScrollView style={{ borderRadius: 0 }}>
               <ListQuestions questions={questions} skill={skill} stage={stage} currentStage={currentStages[skill]} />
@@ -149,7 +165,7 @@ export const SkillScreen = ({ skill }) => {
             </TouchableOpacity>
           </View>
         </View>
-      ) : null
+      ) : <SkillScreen skill={skill}/>
 
     );
   }

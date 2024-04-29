@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, Platform, TouchableOpacity } from 'react-native';
 import { retrieveCurrentStage, saveQuestion, overwriteSpecificJsonFile } from '../services/AsyncService';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Constants from '../component/Constants';
 import { RFPercentage } from 'react-native-responsive-fontsize';
-import { Actions } from 'react-native-router-flux';
+import { Stack, Link } from 'expo-router';
 
 const skillColour = [
     { skill: Constants.CAMPING, bgColour: "#009F54" },
@@ -27,7 +26,16 @@ const getSkillColour = (skill) => {
     return 'blue'
 }
 
-export const SettingsScreen = () => {
+function SettingsScreen() {
+    return <Stack.Screen
+    options={{
+        title: 'Settings',
+        headerBackTitleVisible: false,
+    }}
+/>
+}
+
+export default function Settings() {
     const [currentStages, setCurrentStages] = useState([]);
     var [update, setUpdate] = useState(false)
     useEffect(() => {
@@ -37,7 +45,7 @@ export const SettingsScreen = () => {
         }
         setUp()
     }, [update])
-    
+
     const createThreeButtonAlert = (skill, stage) => (
         Alert.alert(
         `Resetting ${skill} back to 1`,
@@ -58,29 +66,25 @@ export const SettingsScreen = () => {
         setUpdate(true)
     }
 
-    const navigateAboutApp = () => {
-        Actions.aboutApp()
-    }
-
-    if(currentStages.length==0){
-        return null
+    if(currentStages.length===0){
+        return <SettingsScreen/>
     }
     return (
-        <View style={styles.container}>            
+        <View style={styles.container}>
+            <SettingsScreen/>
             {Object.entries(currentStages).map(([skill, stage]) => {
                 return (
                     <View key={skill} style={[styles.itemContainer,styles.borderStyle, { backgroundColor: getSkillColour(skill) }]}>
-                        <Text style={styles.textStyle}> {stage + 1} {skill}</Text>
+                        <Text style={styles.textStyle}>{skill}: {stage + 1}</Text>
                         <TouchableOpacity onPress={() => createThreeButtonAlert(skill, stage)} style={styles.buttonStyle} disabled={stage==0}>
                             <Text style={[styles.textStyle, stage==0 && {opacity:0.5}]}>Reset</Text>
                         </TouchableOpacity>
                     </View>
                 )
             })}
-
-             <TouchableOpacity style={[styles.borderStyle, styles.aboutUsButton]} onPress={() => navigateAboutApp()}>
+             <Link style={[styles.borderStyle, styles.aboutUsButton]} href='/about'>
                 <Text style={styles.aboutUsText}>About Us</Text>
-            </TouchableOpacity>
+            </Link>
         </View >
     )
 }
