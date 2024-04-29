@@ -44,9 +44,19 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/usuzi.ttf"]
+          "fonts": [
+            "./assets/fonts/usuzi.ttf"
+          ]
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "800971e2-5170-4820-91a6-e1d06889323a"
+      }
+    }
   }
 }
