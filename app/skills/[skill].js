@@ -11,6 +11,17 @@ import { saveQuestion } from '../../services/AsyncService';
 import { useLocalSearchParams } from 'expo-router';
 import { Stack } from 'expo-router';
 
+function SkillScreen({ skill }) {
+  return <Stack.Screen
+    options={{
+      title: skill,
+      headerBackTitleVisible: false,
+      headerStyle: {
+        backgroundColor: Constants.SECOND_COLOUR
+      },
+    }}
+  />
+}
 export default function Skill() {
   const { skill } = useLocalSearchParams();
 
@@ -117,20 +128,12 @@ export default function Skill() {
   }
 
   if (questions.length == 0) {
-    return null
+    return <SkillScreen skill={skill}/>
   } else {
     return (
       appReady ? (
         <View style={styles.container}>
-          <Stack.Screen
-            options={{
-              title: skill,
-              headerBackTitleVisible: false,
-              headerStyle: {
-                backgroundColor: Constants.SECOND_COLOUR
-              },
-            }}
-          />
+          <SkillScreen skill={skill}/>
           <View style={styles.scroll}>
             <ScrollView style={{ borderRadius: 0 }}>
               <ListQuestions questions={questions} skill={skill} stage={stage} currentStage={currentStages[skill]} />
@@ -162,7 +165,7 @@ export default function Skill() {
             </TouchableOpacity>
           </View>
         </View>
-      ) : null
+      ) : <SkillScreen skill={skill}/>
 
     );
   }

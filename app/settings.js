@@ -26,13 +26,21 @@ const getSkillColour = (skill) => {
     return 'blue'
 }
 
+function SettingsScreen() {
+    return <Stack.Screen
+    options={{
+        title: 'Settings',
+        headerBackTitleVisible: false,
+    }}
+/>
+}
+
 export default function Settings() {
     const [currentStages, setCurrentStages] = useState([]);
     var [update, setUpdate] = useState(false)
     useEffect(() => {
         const setUp = async () => {
             const tempCurrentStages = await retrieveCurrentStage()
-            console.log("tempCurrentStages", tempCurrentStages)
             setCurrentStages(tempCurrentStages);
         }
         setUp()
@@ -59,16 +67,11 @@ export default function Settings() {
     }
 
     if(currentStages.length===0){
-        return null
+        return <SettingsScreen/>
     }
     return (
         <View style={styles.container}>
-            <Stack.Screen
-                options={{
-                    title: 'Settings',
-                    headerBackTitleVisible: false,
-                }}
-            />
+            <SettingsScreen/>
             {Object.entries(currentStages).map(([skill, stage]) => {
                 return (
                     <View key={skill} style={[styles.itemContainer,styles.borderStyle, { backgroundColor: getSkillColour(skill) }]}>
