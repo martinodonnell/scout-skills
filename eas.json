@@ -5,12 +5,28 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "hooks": {
+        "pre-install": {
+          "cmd": "echo $GOOGLE_SERVICE_BASE64 | base64 --decode > ./google-services.json && echo $GOOGLE_SERVICE_INFO_BASE64 | base64 --decode > ./GoogleService-Info.plist"
+        }
+      }
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "hooks": {
+        "pre-install": {
+          "cmd": "echo $GOOGLE_SERVICE_BASE64 | base64 --decode > ./google-services.json && echo $GOOGLE_SERVICE_INFO_BASE64 | base64 --decode > ./GoogleService-Info.plist"
+        }
+      }
     },
-    "production": {}
+    "production": {
+      "hooks": {
+        "pre-install": {
+          "cmd": "echo $GOOGLE_SERVICE_BASE64 | base64 --decode > ./google-services.json && echo $GOOGLE_SERVICE_INFO_BASE64 | base64 --decode > ./GoogleService-Info.plist"
+        }
+      }
+    }
   },
   "submit": {
     "production": {}
