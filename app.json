@@ -26,13 +26,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.newryscouts.scoutskills",
-      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "package": "com.newryscouts.scoutskills",
       "versionCode": 1,
       "icon": "./assets/imgs/all-skills.png",
-      "googleServicesFile": "./google-services.json"
     },
     "androidStatusBar": {
       "backgroundColor": "#46BDFF",
