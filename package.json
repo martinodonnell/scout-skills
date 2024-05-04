@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "eas-build-pre-install": "echo $GOOGLE_SERVICE_INFO_BASE64 | base64 --decode > /path/to/GoogleService-Info.plist"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
