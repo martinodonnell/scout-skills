@@ -10,7 +10,11 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {}
+    "production": {
+      "secrets": {
+        "files": ["GOOGLE_SERVICE_INFO", "GOOGLE_SERVICE"]
+      }
+    }
   },
   "submit": {
     "production": {}
