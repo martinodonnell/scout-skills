@@ -2,23 +2,20 @@ import React from "react";
 import { StyleSheet, View, Platform } from "react-native";
 import * as Constants from "../component/Constants";
 import SkillSelectButton from "../component/SkillSelectButton";
-import { Stack, Link } from 'expo-router'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { Stack, Link } from "expo-router";
+import Octicons from "@expo/vector-icons/Octicons";
 
 export default function Home() {
   return (
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: 'Adventure Skills',
-          headerRight: () => <Link href='/settings'>
-            <FontAwesomeIcon
-              icon={faCog}
-              size={25}
-              color='white'
-            />
-          </Link>
+          title: "Adventure Skills",
+          headerRight: () => (
+            <Link href="/settings">
+              <Octicons name="gear" size={25} color="white" />
+            </Link>
+          ),
         }}
       />
       <SkillSelectButton skill={Constants.CAMPING} textColor="#009F54" />
@@ -41,6 +38,6 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     backgroundColor: "white",
-    paddingBottom: Platform.OS === 'ios' ? 20 : 10
+    paddingBottom: Platform.OS === "ios" ? 20 : 10,
   },
 });
