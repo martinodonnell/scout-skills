@@ -64,7 +64,7 @@ export default function Skill() {
       if (output !== null) {
         const jsonOutput = JSON.parse(output);
         await setCurrentStages(jsonOutput);
-        await setStage(parseInt(jsonOutput[skill]));
+        await setStage(Math.min(8, parseInt(jsonOutput[skill])));
         setHeaderTitle(jsonOutput[skill]);
       } else {
         alert(Constants.CURRENTSTAGES + " data not recieved");

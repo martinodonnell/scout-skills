@@ -75,7 +75,7 @@ export default function Settings() {
             {Object.entries(currentStages).map(([skill, stage]) => {
                 return (
                     <View key={skill} style={[styles.itemContainer,styles.borderStyle, { backgroundColor: getSkillColour(skill) }]}>
-                        <Text style={styles.textStyle}>{skill}: {stage + 1}</Text>
+                        <Text style={styles.textStyle}>{skill}: {Math.min(9, stage + 1)}</Text>
                         <TouchableOpacity onPress={() => createThreeButtonAlert(skill, stage)} style={styles.buttonStyle} disabled={stage==0}>
                             <Text style={[styles.textStyle, stage==0 && {opacity:0.5}]}>Reset</Text>
                         </TouchableOpacity>
