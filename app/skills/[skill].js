@@ -15,6 +15,7 @@ import { saveQuestion } from "../../services/AsyncService";
 import { useLocalSearchParams } from "expo-router";
 import { Stack } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import analytics from "@react-native-firebase/analytics";
 
 function SkillScreen({ skill }) {
   return (
@@ -93,8 +94,12 @@ export default function Skill() {
       if (nextStage != 10) {
         //update current stage value in storage
         updateCurrentStage();
+        analytics().logEvent("stage_complete", {
+          current_stage: currentStage,
+        });
         refreshScreen(nextStage);
       } else {
+        analytics().logEvent("all_stages_complete");
         alert(
           "You have completed every stage for " +
             skill +

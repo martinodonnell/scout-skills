@@ -9,7 +9,7 @@
       "android",
       "web"
     ],
-    "version": "2.0.2",
+    "version": "2.0.3",
     "orientation": "portrait",
     "icon": "./assets/imgs/all-skills.png",
     "splash": {
@@ -26,11 +26,13 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.newryscouts.scoutskills",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "package": "com.newryscouts.scoutskills",
       "versionCode": 1,
       "icon": "./assets/imgs/all-skills.png",
+      "googleServicesFile": "./google-services.json"
     },
     "androidStatusBar": {
       "backgroundColor": "#46BDFF",
@@ -45,6 +47,16 @@
           "fonts": [
             "./assets/fonts/usuzi.ttf"
           ]
+        }
+      ],
+      "@react-native-firebase/app",
+      "@react-native-firebase/crashlytics",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
         }
       ]
     ],
