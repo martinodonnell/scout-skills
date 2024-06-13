@@ -21,3 +21,13 @@ Starting the app
 ```
 npm start
 ```
+
+## Add to stores
+
+```
+eas build -p ios
+eas submit --platform ios
+
+eas build -p android
+eas submit --platform android
+```
