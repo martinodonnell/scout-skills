@@ -26,6 +26,8 @@ npm start
 
 ```
 eas build -p ios
+    <string>2.0.3</string>
+# For IOS, make sure the CFBundleShortVersionString number in ios/ScoutSkills/Info.plist is set to the version number in app.json
 eas submit --platform ios
 
 eas build -p android
