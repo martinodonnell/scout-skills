@@ -1,6 +1,8 @@
 name: AI Code Reviewer
 
 on:
+  pull_request_review_comment:
+    types: [created]
   issue_comment:
     types: [created]
 
@@ -8,7 +10,9 @@ permissions: write-all
 
 jobs:
   review:
-    if: contains(github.event.comment.body, 'AI Review')
+    if: |
+      (github.event.comment.body == 'AI Review' || contains(github.event.comment.body, 'AI Review')) &&
+      github.event.issue.pull_request
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
