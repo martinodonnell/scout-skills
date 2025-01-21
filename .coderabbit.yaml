@@ -1,0 +1,7 @@
+reviews:
+  enabled: true
+  auto_incremental_review: false
+  on_new_pr: false
+  on_changes_requested: false
+  on_approve: false
+  on_comment: false
